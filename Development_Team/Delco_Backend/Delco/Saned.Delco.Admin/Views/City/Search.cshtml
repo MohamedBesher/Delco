@@ -1,0 +1,122 @@
+﻿@using PagedList.Mvc
+@using Saned.Delco.Admin.Extensions
+@model PagedList.IPagedList<Saned.Delco.Data.Core.Models.City>
+    
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row">
+       
+        <div class="col-sm-12" >
+            <div class="row">
+                <table id="datatable" class="table table-striped table-bordered">
+                    <tr>
+                        <th> اسم المدينة</th>
+                        <th>خط الطول </th>
+                        <th> خط العرض</th>
+                        <th>عدد الكيلومترات</th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Longitude)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Latitude)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumberOfKilometers)
+                            </td>
+                            <td>
+                                <a title="تعديل" href="@(Url.Action("Update", "City", new {id = item.Id}))" class="btn btn-primary"><i title="تعديل" class="fa fa-pencil"></i></a>
+                                @Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                            "Delete", "City",
+                            new { Id = item.Id, Page = ViewBag.Page, Keyword = ViewBag.Keyword, PageSize = ViewBag.PageSize },
+                            new AjaxOptions
+                            {
+                                Confirm = "هل انت متأكد انك تريد حذف المدينة ؟",
+                                UpdateTargetId = "searchResult",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "POST",
+                                LoadingElementId = "ajaxLoaderDiv",
+                                OnSuccess = "onsuccessDeletion",
+                                OnFailure = "onFailureDeletion"
+                            },
+                            new { @class = "btn btn-danger" })
+                                @*<a id="btn_lock" title="حذف" class="btn btn-danger" data-toggle="modal" role="button" onclick="deleteCity('@item.Id') ">
+                                    <i title="حذف" class="fa fa-trash"></i>
+                                </a>*@
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="pull-right">
+                        
+                        @Html.PagedListPager(Model,
+                page => Url.Action("Search", new { page = page, keyword = ViewBag.keyword}),
+                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv" }))
+                      
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="alert alert-success">
+        <strong></strong> لا يوجد مدن.
+    </div>
+}
+
+
+
+
+
+<script>
+        function onsuccessDeletion(data) {
+
+            NotificationService.displaySuccess("تم الحذف بنجاح");
+
+        }
+        function onFailureDeletion(jqXHR, textStatus, errorThrown) {
+
+            if (jqXHR.statusText === "NotFound")
+                NotificationService.displayError("هذا المسار غير موجود");
+            else if (jqXHR.statusText === "Error")
+                NotificationService.displayError("هذة المدينة مستخدمة لا يمكن حذفها .");
+
+            else if (jqXHR.statusText === "UserUsedCity") {
+                NotificationService.displayError("يوجد مستخدمين داخل هذة المدينة.");
+
+            }
+            else if (jqXHR.statusText === "RequestsUsedCity") {
+                NotificationService.displayError("يوجد طلبات داخل هذة المدنية .");
+
+            }
+
+            else if (jqXHR.statusText === "PathsUsedCity") {
+                NotificationService.displayError("يوجد مسارات داخل هذة المدينة.");
+
+            }
+
+
+        }
+
+</script>

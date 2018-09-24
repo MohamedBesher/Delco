@@ -1,0 +1,133 @@
+﻿@using Saned.Delco.Data.Core.Enum
+@model Saned.Delco.Admin.Models.AgentViewModel
+
+
+
+<div class="col-sm-12">
+    <div class="card-box table-responsive">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="m-b-30 m-t-0 header-title"><b></b></h4>
+                <form action="#" class="form-horizontal">
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">اسم المستخدم</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.UserName, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">الاسم بالكامل</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.FullName, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">البريد الالكترونى</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Email, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">رقم الجوال</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.PhoneNumber, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">المدينة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Cityname, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">نوع الطلبات المفضلة </label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.TypeRequest, new { @class = "col-sm-5 control-label" })
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">شركة السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.CompanyName, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">نوع السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Model, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">موديل السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Type, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">لون السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Color, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">رقم لوحة السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.PlateNumber, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">عدد الركاب</label>
+                        <div class="col-sm-7">
+
+                            @Html.DisplayFor(model => model.PassengerNumber, new { @class = "col-sm-5 control-label" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">تقيم المندوب</label>
+                        <div class="col-sm-7">
+
+                            @Html.DisplayFor(model => model.Rate, new { @class = "col-sm-5 control-label" })
+                        </div>
+                    </div>
+
+
+
+
+                </form>
+            </div>
+        </div>
+        </div>
+        </div>

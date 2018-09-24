@@ -1,0 +1,107 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Saned.Delco.Data.Core.Models.City>
+
+@{
+    ViewBag.Title = "المدن";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+        AjaxOptions options = new AjaxOptions
+        {
+            UpdateTargetId = "searchResult",
+            InsertionMode = InsertionMode.Replace,
+            LoadingElementId = "ajaxLoaderDiv"
+        };
+   
+
+}
+
+
+
+
+<div class="col-sm-12">
+    <div class="card-box table-responsive">
+
+        <div class="header-title m-t-0 m-b-30">
+
+            المدن
+            <div class="pull-right">
+
+                <a type="button" href="@Url.Action("Add","City")" class="btn btn-primary waves-effect w-md waves-light m-b-5"> <i class="fa fa-plus"></i> اضافة</a>
+
+            </div>
+        </div>
+        
+        
+      @using (Ajax.BeginForm("Search", options))
+      {
+            <div class="row" style="padding-bottom: 30px">
+
+                <div class="form-group">
+
+                    <div class="col-xs-10">
+
+                        @Html.TextBox("Keyword", (string)ViewBag.Name, new { @class = "form-control" })
+
+                    </div>
+
+
+                    <div class="col-xs-2 pull-left">
+                        <button type="submit" class="btn btn-success pull-left waves-effect w-md waves-light m-b-5"><i class="fa fa-search"></i> بحث</button>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        }
+
+
+        <div id="searchResult">
+            
+            @Html.Action("Search", new { Page = 1, PageSize = 10 })
+
+
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
+
+
+<script>
+
+
+    function deleteCity(id) {
+        debugger;
+        var x = confirm("هل انت متأكد انك تريد حذف المدينة ؟");
+        if (x) {
+            $.ajax({
+                type: 'GET',
+                url: '/City/Destroy/' + id,
+                contentType: "application/json",
+                dataType: "json",
+                success: function(data) {
+                    debugger;
+                    if (data == 0) {
+                        location.reload();
+                    } else if (data == 1) {
+                        alert("لقد تم حذف المدينة من قبل");
+                        location.reload();
+                    } else {
+                        alert("هذه المدينة مرتبط بها عدد من الطلبات والمسنخدمين ولا يمكن مسحها");
+                    }
+
+                },
+                error: function() {
+                }
+            });
+        } 
+        return false;
+    };
+</script>
+

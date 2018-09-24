@@ -1,0 +1,265 @@
+﻿
+@using Saned.Delco.Data.Core.Models
+@model Saned.Delco.Admin.Models.RefuseRequestViewModel
+
+@functions {
+    private Request _request;
+}
+
+@{
+    
+        ViewBag.Title = "الغاء مشوار";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-lg-12">
+    <div class="card-box">
+        <h4 class="header-title m-t-0 m-b-30">
+
+           الغاء مشوار
+        </h4>
+@using (Html.BeginForm("Cancel", "Trips", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    _request = (Request)ViewBag.Request;
+    @Html.HiddenFor(m => m.Id, new { @Value =(_request).Id })
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">        سبب الرفض</label>
+
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.RefuseReasonId,
+                new SelectList(ViewBag.RefuseReasons, "Id", "Value"), "--اختر السبب--", new {@class = "form-control", id = "FromCityId"})
+
+            @Html.ValidationMessageFor(model => model.RefuseReasonId, null, new {@class = "text-danger"})
+
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        
+        <label class="col-sm-2 control-label"  >الوصف</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(u=>u.Cause, new { @class = "form-control", id = "FromCityId",@rows=5 })
+
+            @Html.ValidationMessageFor(model => model.Cause, null, new { @class = "text-danger" })
+
+
+        </div>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-purple waves-effect waves-light">حفظ</button>
+
+    <div class="form-group">
+        <h4 class="header-title m-t-0 m-b-30">
+
+            تفاصيل مشوار
+        </h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="col-sm-3 control-label">اسم صاحب المشوار</label>
+            <div class="col-sm-6">
+
+                <p style="padding-top:8px">@_request.User.UserName</p>
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">اسم صاحب المشوار بالكامل</label>
+            <div class="col-sm-6">
+
+                <p style="padding-top:8px">@_request.User.FullName</p>
+
+            </div>
+        </div>
+
+       
+        <div class="form-group">
+            <label class="col-sm-3 control-label">من </label>
+            <div class="col-sm-6">
+                <p style="padding-top:8px">@_request.ToLocation</p>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">الى </label>
+            <div class="col-sm-6">
+                <p style="padding-top:8px">@_request.FromLocation</p>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">السعر </label>
+            <div class="col-sm-6">
+                <p style="padding-top:8px">@_request.Price</p>
+
+            </div>
+        </div>
+        @if (!string.IsNullOrEmpty(_request.Description))
+                {
+            <div class="form-group">
+                <label class="col-sm-3 control-label">الوصف </label>
+                <div class="col-sm-6">
+                    <p style="padding-top:8px">@_request.Description</p>
+
+                </div>
+            </div>
+        }
+
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">تاريخ الاضافة </label>
+            <div class="col-sm-6">
+                <p style="padding-top:8px">@_request.CreatedDate</p>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12 col-xs-12">
+                <div id="MapDiv" style="Width: auto;height: 400px"></div>
+            </div>
+
+        </div>
+
+    </div>
+}
+            
+        
+
+
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+
+@section Scripts {
+    <script>
+
+        initMapWithCoordinates("MapDiv", @_request.FromLatitude,@_request.FromLongtitude, @_request.ToLatitude, @_request.ToLongtitude);
+
+
+
+
+        function deleteMarkers() {
+            clearMarkers();
+            markers = [];
+        }
+
+        function clearMarkers() {
+            setMapOnAll();
+        }
+
+        function setMapOnAll() {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markers = [];
+        }
+
+        var markers = [];
+        var map;
+
+        function initMapWithCoordinates(divId, fromLat, fromLng, toLat, toLng) {
+
+            var mapDiv = document.getElementById(divId);
+
+            var map = new google.maps.Map(
+                mapDiv, {
+                zoom: 3,
+                center: {lat: fromLat, lng:fromLng},
+                mapTypeId: 'terrain'
+                });
+
+            var flightPlanCoordinates = [
+            {lat: fromLat, lng: fromLng},
+            {lat: toLat, lng: toLng},
+
+            ];
+            var flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            //map = new google.maps.Map(mapDiv,
+            //{
+            //    center: new google.maps.LatLng(fromLat, fromLng),
+            //    zoom: 7,
+            //    mapTypeId: 'terrain'
+            //});
+
+
+
+                var fromLatlng = new google.maps.LatLng(fromLat, fromLng);
+                var toLatlng = new google.maps.LatLng(toLat, toLng);
+                var fromMarker = new google.maps.Marker({
+                    position: fromLatlng,
+                    map: map,
+                    title: "من"
+
+                });
+                var toMarker = new google.maps.Marker({
+                    position: toLatlng,
+                    map: map,
+                    title: "الى"
+
+                });
+                markers = [];
+               map.panTo(fromLatlng);
+                map.panTo(toLatlng);
+               markers.push(fromMarker);
+                markers.push(toMarker);
+
+                flightPath.setMap(map);
+
+
+
+
+
+        }
+
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 3,
+                center: {lat: 0, lng: -180},
+                mapTypeId: 'terrain'
+            });
+
+            var flightPlanCoordinates = [
+              {lat: 37.772, lng: -122.214},
+              {lat: 21.291, lng: -157.821},
+              {lat: -18.142, lng: 178.431},
+              {lat: -27.467, lng: 153.027}
+            ];
+            var flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            flightPath.setMap(map);
+        }
+
+
+
+
+
+    </script>
+}

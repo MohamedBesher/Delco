@@ -1,0 +1,44 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            الإشعارات
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div id="divInfiniteAgentNotifications" class="page-content infinite-scroll pull-to-refresh-content">
+    <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+    </div>
+    <div class="content-block" ng-model="user">
+        <h3>
+            <span>تفعيل إشعارات الطلبات الجديدة</span>
+            <label class="label-switch notifications-label">
+                <input name="newNotificationCheck" type="checkbox" ng-model="user.isNewNotifications" ng-change="ChangeNewNotificationSettings(user)" />
+                <div class="checkbox"></div>
+            </label>
+        </h3>
+        <div ng-repeat="notification in notifications">
+            <div class="card" style= "border-right :5px solid {{notification.color}}">
+                <h3>
+                    <b><i style="color:{{notification.color}}" class="{{notification.icon}}"></i> {{notification.message}}</b>
+                    <span>{{notification.reason}}</span>
+                </h3>
+            </div>
+        </div>
+        <div id="divNotificationAgentNotifications" class="divAlert" ng-show="agentNotificationsAlert">
+            <p class="pNotification">لا يوجد إشعارات</p>
+        </div>
+        <!--<div id="infiniteLoaderAgentNotifications" class="infiniteLoader infinite-scroll-preloader" ng-show="agentNotificationsInfiniteLoader">
+            <div class="preloader">
+                <img ng-src="img/load.svg" />
+            </div>
+        </div>-->
+    </div>
+</div>

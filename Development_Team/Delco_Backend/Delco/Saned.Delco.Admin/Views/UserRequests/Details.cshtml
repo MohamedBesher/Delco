@@ -1,0 +1,316 @@
+﻿@model Saned.Delco.Data.Core.Models.Request
+
+@{
+    ViewBag.Title = "تفاصيل مشوار";
+   
+}
+
+<div class="col-lg-12">
+    <div class="card-box">
+        <h4 class="header-title m-t-0 m-b-30">
+
+            تفاصيل مشوار        </h4>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr/>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="form-group">
+                    <label class ="col-sm-3 control-label">اسم صاحب الطلب / المشوار</label>  
+                    <div class="col-sm-6">
+                        @if (Model.User == null)
+                        {
+                            <p style="padding-top:8px">غير معروف</p>
+
+                        }
+                        else
+                        {
+                            <p style="padding-top:8px">@Model.User.UserName</p>
+
+                        }
+                       
+
+                    </div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">اسم صاحب المشوار بالكامل</label>
+                    <div class="col-sm-6">
+                        @if (Model.User == null)
+                        {
+                            <p style="padding-top:8px">غير معروف</p>
+
+                        }
+                        else
+                        {
+                            <p style="padding-top:8px">@Model.User.FullName</p>
+
+                        }
+
+                      
+
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">اسم المدينة</label>
+                    <div class="col-sm-6">
+                        <p style="padding-top:8px">@Model.City.Name</p>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">من </label>
+                    <div class="col-sm-6">
+                        <p style="padding-top:8px">@Model.ToLocation</p>
+
+                    </div>
+                </div>
+               
+                @*<div class="form-group">
+                    <label class="col-sm-3 control-label">الى </label>
+                    <div class="col-sm-6">
+                        <p style="padding-top:8px">@Model.FromLocation</p>
+
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">السعر </label>
+                    <div class="col-sm-6">
+                        <p style="padding-top:8px">@Model.Price</p>
+                     
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">تفاصيل الطلب / المشوار </label>
+                        <div class="col-sm-6">
+                            <p style="padding-top:8px">@Model.Description</p>
+                           
+                        </div>
+                    </div>
+                }
+                
+                
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">تاريخ الاضافة </label>
+                    <div class="col-sm-6">
+                        <p style="padding-top:8px">@Model.CreatedDate</p>
+
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    <div class="col-md-12 col-xs-12">
+                        <div id="MapDiv" style="Width: auto;height: 400px"></div>
+                    </div>
+
+                </div>*@
+                
+            </div>
+        }
+
+
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+<script>
+
+        @*initMapWithCoordinates("MapDiv", @Model.FromLatitude,@Model.FromLongtitude, @Model.ToLatitude, @Model.ToLongtitude);*@
+
+
+
+
+        function deleteMarkers() {
+            clearMarkers();
+            markers = [];
+        }
+
+        function clearMarkers() {
+            setMapOnAll();
+        }
+
+        function setMapOnAll() {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markers = [];
+        }
+
+        var markers = [];
+        var map;
+
+        function initMapWithCoordinates(divId, fromLat, fromLng, toLat, toLng) {
+
+            var mapDiv = document.getElementById(divId);
+
+            var map = new google.maps.Map(
+                mapDiv, {
+                zoom: 3,
+                center: {lat: fromLat, lng:fromLng},
+                mapTypeId: 'terrain'
+                });
+
+            var flightPlanCoordinates = [
+            {lat: fromLat, lng: fromLng},
+            {lat: toLat, lng: toLng},
+            
+            ];
+            var flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            //map = new google.maps.Map(mapDiv,
+            //{
+            //    center: new google.maps.LatLng(fromLat, fromLng),
+            //    zoom: 7,
+            //    mapTypeId: 'terrain'
+            //});
+
+
+        
+                var fromLatlng = new google.maps.LatLng(fromLat, fromLng);
+                var toLatlng = new google.maps.LatLng(toLat, toLng);
+                var fromMarker = new google.maps.Marker({
+                    position: fromLatlng,
+                    map: map,
+                    title: "من"
+
+                });
+                var toMarker = new google.maps.Marker({
+                    position: toLatlng,
+                    map: map,
+                    title: "الى"
+
+                });
+                markers = [];
+               map.panTo(fromLatlng);
+                map.panTo(toLatlng);
+               markers.push(fromMarker);
+                markers.push(toMarker);
+
+                flightPath.setMap(map);
+
+
+
+
+
+        }
+
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 3,
+                center: {lat: 0, lng: -180},
+                mapTypeId: 'terrain'
+            });
+
+            var flightPlanCoordinates = [
+              {lat: 37.772, lng: -122.214},
+              {lat: 21.291, lng: -157.821},
+              {lat: -18.142, lng: 178.431},
+              {lat: -27.467, lng: 153.027}
+            ];
+            var flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            flightPath.setMap(map);
+        }
+
+
+        //function placeMarkerAndPanTo(latLng, map, maplat, maplng) {
+        //    deleteMarkers(); // edited 15.0000
+        //    var marker = new google.maps.Marker({
+        //        position: latLng,
+        //        map: map,
+        //        draggable: true
+        //    });
+        //    map.panTo(latLng);
+        //    markers.push(marker);
+
+        //    var lat = $('#' + maplat);
+        //    lat.val(latLng.lat());
+        //    lat.trigger('input'); // Use for Chrome/Firefox/Edge
+        //    lat.trigger('change');
+
+
+        //    var lng = $('#' + maplng);
+        //    lng.val(latLng.lng());
+        //    lng.trigger('input'); // Use for Chrome/Firefox/Edge
+        //    lng.trigger('change');
+        //}
+
+
+        //function placeMarker(latitude, longtide) {
+        //    deleteMarkers(); // edited 15.0000
+
+        //    var myLatlng = new google.maps.LatLng(latitude, longtide);
+
+        //    var marker = new google.maps.Marker({
+        //        position: myLatlng,
+        //        map: map,
+        //        draggable: true
+        //    });
+
+
+        //    var maplat = attrs.maplat;
+        //    var maplng = attrs.maplng;
+
+        //    google.maps.event.addListener(
+        //        marker,
+        //        'drag',
+        //        function() {
+        //            var lat = $('#' + maplat);
+        //            lat.val(marker.position.lat());
+        //            lat.trigger('input'); // Use for Chrome/Firefox/Edge
+        //            lat.trigger('change');
+
+
+        //            var lng = $('#' + maplng);
+        //            lng.val(marker.position.lng());
+        //            lng.trigger('input'); // Use for Chrome/Firefox/Edge
+        //            lng.trigger('change');
+
+
+        //        }
+        //    );
+
+
+        //    map.panTo(myLatlng);
+        //    markers.push(marker);
+
+
+        //    var lat = $('#' + maplat);
+        //    lat.val(myLatlng.lat());
+        //    lat.trigger('input'); // Use for Chrome/Firefox/Edge
+        //    lat.trigger('change');
+
+
+        //    var lng = $('#' + maplng);
+        //    lng.val(myLatlng.lng());
+        //    lng.trigger('input'); // Use for Chrome/Firefox/Edge
+        //    lng.trigger('change');
+        //}
+
+
+
+</script>
+}

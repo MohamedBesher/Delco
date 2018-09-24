@@ -1,0 +1,382 @@
+﻿
+@using PagedList.Mvc
+@using Saned.Delco.Admin.Extensions
+@using Saned.Delco.Data.Core.Enum
+
+@model PagedList.IPagedList<Saned.Delco.Data.Core.Dto.RequestListDto>
+
+
+
+
+
+    <div class="row">
+        <table id="datatable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>م</th>
+                    <th>اسم الطلب</th>
+                    <th>صاحب الطلب</th>
+                    @if (Model.Count > 0 && (Model[0].Status == RequestStatusEnum.Inprogress || Model[0].Status == RequestStatusEnum.Delivered))
+                    {
+                        <th> اسم المندوب</th>
+
+                    }
+                    <th>المدينة</th>
+
+                    <th>السعر</th>
+                    <th>نسبة الادارة</th>
+
+                    @*<th>عدد الركاب</th>*@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @if (Model.Count > 0)
+            {
+            int counter = 0;
+            foreach (var item in Model)
+            {
+                counter++;
+                <tr>
+                    <td>@counter</td>
+                    <td>طلب رقم @item.Id</td>
+                    <td>
+                        @if (item.UserName == null)
+                        {
+                            <p>غير معروف </p>
+                        }
+                        else
+                        {
+                            @item.UserName
+
+                        }
+                      
+                    </td>
+                    
+                    @if (item.Status == RequestStatusEnum.Inprogress || item.Status == RequestStatusEnum.Delivered)
+                    {
+                        <td>
+                            @item.AgentUserName
+                        </td>
+
+                    }
+                    <td>
+                       
+                            @item.CityName
+                       
+
+
+
+
+                    </td>
+                    <td>
+                         @Math.Round(item.Price,2)
+                    </td>
+                    <td>
+                        @Math.Round((item.Price * (ViewBag.ManagementPercentage / 100)),2 )
+                    </td>
+                    @*<td>
+                        @if (item.PassengerNumber == null)
+                        {
+                            <strong>0</strong>
+                        }
+                        else
+                        {
+                            <strong>@item.PassengerNumber.Value</strong>
+                        }
+
+                    </td>*@
+                    
+                    
+                      
+                    
+
+                    
+                    <td>
+                    
+                        @if (item.Status == RequestStatusEnum.Inprogress && item.UserId != null)
+                        {
+                            <a title="الغاء" href="@(Url.Action("Cancel", "Requests", new {id = item.Id}))" class="btn btn-warning">
+                                <i title="الغاء" class="fa fa-window-close"></i>
+                            </a>
+                        }
+
+                        <a title="تعديل" href="@(Url.Action("Details", "Requests", new {id = item.Id}))" class="btn btn-primary">
+                            <i title="تعديل" class="fa fa-file-text-o"></i>
+                        </a>
+                        
+                        @{
+                            if (item.Status == RequestStatusEnum.Delivered)
+                            {
+                           
+                            if (item.IsHidden)
+                            {
+                                @Ajax.RawActionLink(string.Format("<i class='fa fa-eye' title = 'الغاء الاخفاء' ></i>"),
+                  "UnHide", "Requests",
+                  new { Id = item.Id },
+                  new AjaxOptions
+                  {
+                      HttpMethod = "POST",
+                      OnSuccess = "onsuccessUnHide($(this),data)",
+                      OnFailure = "onFailureUnHide()"
+                  },
+                  new { @class = "btn btn-danger", id = "UnHide" + item.Id });
+                            }
+                            else
+                            {
+                                @Ajax.RawActionLink(string.Format("<i title='الاخفاء'  class='fa fa-eye-slash'></i>"),
+                 "Hide", "Requests",
+                 new { Id = item.Id },
+                 new AjaxOptions
+                 {
+                     HttpMethod = "POST",
+                     OnSuccess = "onsuccessHide($(this),data)",
+                     OnFailure = "onFailureHide()"
+                 },
+                 new { @class = "btn btn-success", id = "Hide" + item.Id });
+                                }
+                            }
+
+
+                        }
+                        
+                        
+                        @if (item.Status != RequestStatusEnum.Inprogress || item.UserId == null)
+                        {
+                            @Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                            "Delete", "Requests",
+                            new
+                            {
+                                Id = item.Id,
+                                Page = ViewBag.Page,
+                                Keyword = ViewBag.Keyword,
+                                PageSize = ViewBag.PageSize,
+                                UserId = ViewBag.UserId,
+                                AgentId = ViewBag.AgentId,
+                                Status = ViewBag.Status,
+                                CityId = ViewBag.CityId,
+
+
+                            },
+                            new AjaxOptions
+                            {
+                                Confirm = "هل انت متأكد انك تريد حذف الطلب ؟",
+                                UpdateTargetId = "searchResult",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "POST",
+                                LoadingElementId = "ajaxLoaderDiv",
+                                OnSuccess = "onsuccessDeletion",
+                                OnFailure = "onFailureDeletion"
+                            },
+                            new { @class = "btn btn-danger" })
+
+
+                        }
+
+                    </td>
+
+
+                </tr>
+            }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7"><strong> لا يوجد طلبات   .</strong> </td>
+                    </tr>
+                }
+
+           
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="dataTables_info">
+                @if (Model.Count > 0)
+                {
+                    <div> Showing @ViewBag.ResultCount entries</div>  
+                }
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                @if (Model.Count > 0)
+                {
+                    if (Model[0].Status == RequestStatusEnum.New)
+                {
+                        @Html.PagedListPager(Model,
+                    page => Url.Action("Search", new
+                    {
+                        Page = page,
+                        Keyword = ViewBag.Keyword,
+                        PageSize = ViewBag.PageSize,
+                        UserId = ViewBag.UserId,
+                        AgentId = ViewBag.AgentId,
+                        Status = ViewBag.Status,
+                        CityId = ViewBag.CityId,
+                    }),
+                    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv", OnSuccess = "pagingSuccess" }))
+                    }
+                    else if (Model[0].Status == RequestStatusEnum.Inprogress)
+                    {
+                        @Html.PagedListPager(Model,
+                    page => Url.Action("SearchInProgress", new
+                    {
+                        Page = page,
+                        Keyword = ViewBag.Keyword,
+                        PageSize = ViewBag.PageSize,
+                        UserId = ViewBag.UserId,
+                        AgentId = ViewBag.AgentId,
+                        Status = ViewBag.Status,
+                        CityId = ViewBag.CityId,
+                    }),
+                    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv", OnSuccess = "pagingSuccess" }))
+                    }
+
+
+                    else if (Model[0].Status == RequestStatusEnum.Canceled)
+                    {
+                        @Html.PagedListPager(Model,
+                    page => Url.Action("SearchCanceled", new
+                    {
+                        Page = page,
+                        Keyword = ViewBag.Keyword,
+                        PageSize = ViewBag.PageSize,
+                        UserId = ViewBag.UserId,
+                        AgentId = ViewBag.AgentId,
+                        Status = ViewBag.Status,
+                        CityId = ViewBag.CityId,
+                    }),
+                    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv", OnSuccess = "pagingSuccess" }))
+                    }
+
+                    else if (Model[0].Status == RequestStatusEnum.Delivered)
+                    {
+                        @Html.PagedListPager(Model,
+                    page => Url.Action("SearchDelivered", new
+                    {
+                        Page = page,
+                        Keyword = ViewBag.Keyword,
+                        PageSize = ViewBag.PageSize,
+                        UserId = ViewBag.UserId,
+                        AgentId = ViewBag.AgentId,
+                        Status = ViewBag.Status,
+                        CityId = ViewBag.CityId,
+                    }),
+                    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv", OnSuccess = "pagingSuccess" }))
+                    }
+
+                }
+               
+               
+            </div> 
+           
+        </div>
+</div>
+
+
+
+
+
+
+
+    <script>
+        function onsuccessDeletion(data) {
+
+            NotificationService.displaySuccess("تم الحذف بنجاح");
+           
+        }
+        function onFailureDeletion(jqXHR, textStatus, errorThrown) {
+
+            if (jqXHR.statusText == "NotFound")
+                NotificationService.displayError("هذا الطلب غير موجود");
+            else
+                NotificationService.displayError("حدث خطأ أثناء الحذف .");
+
+
+        }
+
+        function onsuccessHide(btn, data) {
+            if (data.message === "Hidden") {
+                btn.html("<i title='الغاء الاخفاء' class='fa fa-eye'></i>");
+                var fail = btn.attr('data-ajax-failure').replace('Hide', 'UnHide');
+                var success = btn.attr('data-ajax-success').replace('Hide', 'UnHide');
+                btn.attr('data-ajax-failure', fail);
+                btn.attr('data-ajax-success', success);
+
+
+                //var advertisementId = btn.prop('id').replace("Approve", "Notify");
+                //if (!$('#' + advertisementId).is(':visible'))
+                //    $('#' + advertisementId).fadeIn();
+
+
+                var path = btn.attr('href').replace('Hide', 'UnHide');
+                btn.attr('href', path);
+
+
+                btn.removeClass('btn-success');
+                btn.addClass('btn-danger');
+                NotificationService.displaySuccess("تم الاخفاء بنجاح");
+            }
+            else if (data.message === "NotFound") {
+                NotificationService.displayError("هذا الطلب غير موجود .");
+            }
+            else
+                NotificationService.displayError("حدث خطأ أثناء الموافقة .");
+
+
+        }
+        function onFailureHide() {
+            NotificationService.displayError("حدث خطأ أثناء الاخفاء .");
+
+        }
+        function onsuccessUnHide(btn, data) {
+            if (data.message === "UnHidden") {
+                btn.html("<i title='الاخفاء' class='fa fa-eye-slash'></i>");
+                var path = btn.attr('href').replace('UnHidden', 'Hidden');
+
+                var advertisementId = btn.prop('id').replace("UnHidden", "Hidden");
+                if (!$('#' + advertisementId).is(':visible'))
+                    $('#' + advertisementId).fadeOut();
+
+
+                btn.attr('href', path);
+                var fail = btn.attr('data-ajax-failure').replace('UnHidden', 'Hidden');
+                var success = btn.attr('data-ajax-success').replace('UnHidden', 'Hidden');
+                btn.attr('data-ajax-failure', fail);
+                btn.attr('data-ajax-success', success);
+
+                btn.removeClass('btn-danger');
+                btn.addClass('btn-success');
+                NotificationService.displaySuccess("تم الغاء الاخفاء بنجاح");
+            }
+            else if (data.message === "NotFound")
+                NotificationService.displayError("هذا الطلب غير موجود .");
+            else
+                NotificationService.displayError("حدث خطأ أثناء الغاء الاخفاء .");
+        }
+        function onFailureUnHide(btn) {
+            NotificationService.displayError("حدث خطأ أثناء الغاء الاخفاء .");
+
+        }
+
+
+
+
+
+
+    </script>
+
+                   
+
+                 
+
+
+

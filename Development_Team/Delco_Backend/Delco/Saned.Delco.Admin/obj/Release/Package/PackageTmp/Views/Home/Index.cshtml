@@ -1,0 +1,338 @@
+﻿@model Saned.Delco.Admin.Models.StatisticsModel
+@{
+    ViewBag.Title = "الرئيسة ";
+}
+
+@if (Model != null)
+{
+    <div class="row">
+        <a onclick="showPageLoadingSpinner()" href="@Url.Action("Users","User")">
+            <div class="col-lg-3 col-md-6">
+                <div class="card-box blue">
+
+
+                    <h4 class="header-title m-t-0 m-b-30">عدد المستخدمين</h4>
+
+                    <div class="widget-box-2">
+                        <div class="widget-detail-2">
+                            <span class="pull-left">
+                                @*<i class="zmdi zmdi-nature-people"></i>*@
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <h2 class="m-b-0"> @Model.UserCount </h2>
+                        </div>
+                        <div class="">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <!-- end col -->
+    <a onclick="showPageLoadingSpinner()" href="@Url.Action("Agents","User")">
+        <div class="col-lg-3 col-md-6">
+            <div class="card-box darkGreen">
+
+
+                <h4 class="header-title m-t-0 m-b-30">عدد المندوبين</h4>
+
+                <div class="widget-box-2">
+                    <div class="widget-detail-2">
+                        <span class="pull-left">
+                            @*<i class="zmdi zmdi-nature-people"></i>*@
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <h2 class="m-b-0"> @Model.AgentCount </h2>
+                    </div>
+                    <div class="">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+        
+        
+        <a onclick="showPageLoadingSpinner()" href="@Url.Action("AgentsRequest","User")">
+            <div class="col-lg-3 col-md-6">
+                <div class="card-box darkGreen">
+
+
+                    <h4 class="header-title m-t-0 m-b-30">
+                        طلبات المندوبين
+                        
+                        @Html.Action("_GetUnSeenAgentRequest", "Home")
+
+
+                    </h4>
+
+                    <div class="widget-box-2">
+                        <div class="widget-detail-2">
+                            <span class="pull-left">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <h2 class="m-b-0"> @Model.AgentRequestsCount </h2>
+                        </div>
+                        <div class="">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    <!-- end col -->
+        <a onclick="showPageLoadingSpinner()" href="@Url.Action("index","InternalPaths")">
+            <div class="col-lg-3 col-md-6">
+                <div class="card-box lightGreen">
+
+
+                    <h4 class="header-title m-t-0 m-b-30">عدد المسارات الداخلية</h4>
+
+                    <div class="widget-box-2">
+                        <div class="widget-detail-2">
+                            <span class="pull-left">
+                                @*<i class="zmdi zmdi-nature-people"></i>*@
+                                <i class="fa fa-map-signs"></i>
+                            </span>
+                            <h2 class="m-b-0"> @Model.InternalPath </h2>
+                        </div>
+                        <div class="">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- end col -->
+        <a onclick="showPageLoadingSpinner()" href="@Url.Action("Index", "ExternalPaths")">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card-box yellow">
+
+
+                    <h4 class="header-title m-t-0 m-b-30">عدد المسارات الخارجية</h4>
+
+                    <div class="widget-box-2">
+                        <div class="widget-detail-2">
+                            <span class="pull-left">
+                                @*<i class="zmdi zmdi-nature-people"></i>*@
+                                <i class="fa fa-map-signs"></i>
+                            </span>
+                            <h2 class="m-b-0"> @Model.ExternalPath </h2>
+                        </div>
+                        <div class="">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- end col -->
+        <a onclick="showPageLoadingSpinner()" href="@Url.Action("Index", "Requests")">
+            <div class="col-lg-3 col-md-6">
+                <div class="card-box purple">
+
+
+                    <h4 class="header-title m-t-0 m-b-30">عدد الطلبات المعروضة</h4>
+
+                    <div class="widget-box-2">
+                        <div class="widget-detail-2">
+                            <span class="pull-left">
+                                @*<i class="zmdi zmdi-nature-people"></i>*@
+                                <i class="fa fa-cart-plus"></i>
+                            </span>
+                            <h2 class="m-b-0"> @Model.RequestNew </h2>
+                        </div>
+                        <div class="">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+
+        <!-- end col -->
+
+        <a onclick="showPageLoadingSpinner()" href="@Url.Action("Canceled","Requests")"><div class="col-lg-3 col-md-6">
+    <div class="card-box darkOrange">
+
+
+        <h4 class="header-title m-t-0 m-b-30">  عدد الطلبات الملغاة</h4>
+
+        <div class="widget-box-2">
+            <div class="widget-detail-2">
+                <span class="pull-left">
+                    @*<i class="zmdi zmdi-nature-people"></i>*@
+                    <i class="fa fa-cart-plus"></i>
+                </span>
+                <h2 class="m-b-0"> @Model.RequestCanceled </h2>
+            </div>
+            <div class="">
+
+            </div>
+        </div>
+    </div>
+</div></a>
+    <a onclick="showPageLoadingSpinner()" href="@Url.Action("InProgress", "Requests")">
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="card-box darkPurple">
+
+
+                <h4 class="header-title m-t-0 m-b-30">عدد الطلبات قيد التنفيذ</h4>
+
+                <div class="widget-box-2">
+                    <div class="widget-detail-2">
+                        <span class="pull-left">
+                            @*<i class="zmdi zmdi-nature-people"></i>*@
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                        <h2 class="m-b-0"> @Model.RequestInProgress  </h2>
+                    </div>
+                    <div class="">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+        <!-- end col -->
+    <!-- end col -->
+    <a onclick="showPageLoadingSpinner()" href="@Url.Action("Delivered", "Requests")">
+        <div class="col-lg-3 col-md-6">
+            <div class="card-box gray">
+
+
+                <h4 class="header-title m-t-0 m-b-30">عدد الطلبات المنفذة</h4>
+
+                <div class="widget-box-2">
+                    <div class="widget-detail-2">
+                        <span class="pull-left">
+                            @*<i class="zmdi zmdi-nature-people"></i>*@
+                            <i class="fa fa-cart-plus"></i>
+                        </span>
+                        <h2 class="m-b-0"> @Model.RequestDelivered</h2>
+                    </div>
+                    <div class="">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+        <!-- end col -->
+
+
+    <a onclick="showPageLoadingSpinner()" href="@Url.Action("Index","Trips")">
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="card-box CRUSTA">
+
+
+                <h4 class="header-title m-t-0 m-b-30">عدد المشاوير المعروضة</h4>
+
+                <div class="widget-box-2">
+                    <div class="widget-detail-2">
+                        <span class="pull-left">
+                            @*<i class="zmdi zmdi-nature-people"></i>*@
+                            <i class="fa fa-car"></i>
+                        </span>
+                        <h2 class="m-b-0"> @Model.TripNew </h2>
+                    </div>
+                    <div class="">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+        <a onclick="showPageLoadingSpinner()" href="@Url.Action("Canceled","Trips")">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card-box STUDIO">
+
+
+                    <h4 class="header-title m-t-0 m-b-30">عدد المشاوير الملغاة</h4>
+
+                    <div class="widget-box-2">
+                        <div class="widget-detail-2">
+                            <span class="pull-left">
+                                @*<i class="zmdi zmdi-nature-people"></i>*@
+                                <i class="fa fa-car"></i>
+                            </span>
+                            <h2 class="m-b-0"> @Model.TripCanceled </h2>
+                        </div>
+                        <div class="">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    <a onclick="showPageLoadingSpinner()" href="@Url.Action("InProgress","Trips")">
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card-box PURPLE">
+
+
+                <h4 class="header-title m-t-0 m-b-30"> عدد المشاوير قيد التنفيذ</h4>
+
+                <div class="widget-box-2">
+                    <div class="widget-detail-2">
+                        <span class="pull-left">
+                            @*<i class="zmdi zmdi-nature-people"></i>*@
+                            <i class="fa fa-car"></i>
+                        </span>
+                        <h2 class="m-b-0"> @Model.TripInProgress </h2>
+                    </div>
+                    <div class="">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+        <a onclick="showPageLoadingSpinner()" href="@Url.Action("Delivered","Trips")">
+            <div class="col-lg-3 col-md-6">
+                <div class="card-box THUNDERBIRD">
+
+
+                    <h4 class="header-title m-t-0 m-b-30">عدد المشاوير المنفذة</h4>
+
+                    <div class="widget-box-2">
+                        <div class="widget-detail-2">
+                            <span class="pull-left">
+                                <i class="fa fa-car"></i>
+                            </span>
+                            <h2 class="m-b-0"> @Model.TripDelivered </h2>
+                        </div>
+                        <div class="">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </a>
+
+        <!-- end col -->
+        <!-- end col -->
+        <!-- end col -->
+        <!-- end col -->
+    </div>
+}
+
+
+<style>
+    
+    .card-box span i {
+    font-size: 2.5em; 
+}
+</style>
+
+
+

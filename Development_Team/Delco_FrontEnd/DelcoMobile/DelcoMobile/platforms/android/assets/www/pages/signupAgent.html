@@ -1,0 +1,203 @@
+﻿<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="logo-cont"> <img src="img/logo.png" /> </div>
+    <div class="list-block">
+        <form name="$parent.SignupAgentForm" ng-submit="submitForm($parent.SignupAgentForm.$valid)" novalidate>
+            <ul>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.name.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-person"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="name" class="form-control" type="text" placeholder="الاسم (كما في بطاقة الأحوال)" ng-model="agentForm.name" required>
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.name.$error.required" class="error-block">يجب إدخال الإسم</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.username.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-person"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="username" class="form-control" type="text" placeholder="اسم المستخدم" ng-pattern="nameRegex" ng-model="agentForm.username" required ng-minlength="4">
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.username.$error.required" class="error-block">يجب إدخال اسم المستخدم</p>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.username.$error.minlength" class="error-block">اسم المستخدم يجب ألا يقل عن أربع أحرف</p>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.username.$error.pattern" class="error-block">اسم المستخدم يجب أن يكون باللغة الإنجليزية ومن غير مسافات</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.mobile.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-call"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="mobile" class="form-control" type="number" placeholder="رقم الجوال" ng-model="agentForm.mobile" required ng-minlength="10" ng-maxlength="10">
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.mobile.$error.required" class="error-block">يجب إدخال رقم الجوال</p>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.mobile.$error.pattern" class="error-block">رقم الجوال غير صحيح</p>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.mobile.$error.minlength" class="error-block">رقم الجوال يجب أن يكون عشرة أرقام فقط</p>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.mobile.$error.maxlength" class="error-block">رقم الجوال يجب أن يكون عشرة أرقام فقط</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.email.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-mail"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="email" class="form-control" type="email" placeholder="البريد الإلكترونى" ng-pattern="emailRegex" ng-model="agentForm.email" required>
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset  && $parent.SignupAgentForm.email.$error.required" class="error-block">يجب إدخال البريد الإلكتروني</p>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.email.$error.pattern" class="error-block">البريد الإلكتروني غير صحيح</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.password.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="password" class="form-control" type="password" placeholder="كلمة المرور" ng-model="agentForm.password" required ng-minlength="6" ng-maxlength="30">
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset  && $parent.SignupAgentForm.password.$error.required" class="error-block">يجب إدخال كلمة السر</p>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.password.$error.minlength" class="error-block">كلمة السر يجب ألا تقل عن ستة أحرف</p>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.password.$error.maxlength" class="error-block">كلمة السر يجب ألا تزيد عن ثلاثين حرفا</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.confirmpassword.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="confirmpassword" class="form-control" type="password" placeholder="تأكيد كلمة المرور" ng-model="agentForm.confirmpassword" ng-pattern="agentForm.password" required >
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.confirmpassword.$error.required" class="error-block">يجب تأكيد كلمة السر</p>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.confirmpassword.$error.pattern" class="error-block">كلمتا السر غير متطابقتين</p>
+                </li>
+                <li>
+                    <a href="#" data-open-in="picker" data-picker-close-text="إغلاق" class="item-link smart-select" data-back-on-select="true">
+                        <select ng-model="agentForm.city" name="city" data-ng-options="city as city.name for city in cites" required>
+                            <option value="" selected disabled>المدينة</option>
+                        </select>
+                        <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.city.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-android-pin"></i></div>
+                            <div class="item-inner"> </div>
+                        </div>
+                        <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.city.$error.required" class="error-block">يجب اختيار المدينة</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-open-in="picker" data-picker-close-text="إغلاق" class="item-link smart-select" data-back-on-select="true">
+                        <select ng-model="agentForm.orderType" name="orderType" required>
+                            <option value="" selected disabled>نوع الطلبات المفضلة</option>
+                            <option value="1">مشاوير</option>
+                            <option value="2">طلبات</option>
+                            <option value="3">كلاهما</option>
+                        </select>
+                        <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.orderType.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-briefcase"></i></div>
+                            <div class="item-inner"> </div>
+                        </div>
+                        <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.orderType.$error.required" class="error-block">يجب اختيار نوع الطلب المفضل</p>
+                    </a>
+                </li>
+
+                <li><p>بيانات السيارة</p></li>
+
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.carCompany.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-car"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="carCompany" class="form-control" type="text" placeholder="شركة السيارة" ng-model="agentForm.carCompany" required />
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.carCompany.$error.required" class="error-block">يجب اختيار شركة السيارة</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.carType.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-car"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="carType" class="form-control" type="text" placeholder="نوع السيارة" ng-model="agentForm.carType" required>
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.carType.$error.required" class="error-block">يجب اختيار نوع السيارة</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.carModel.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-car"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="carModel" class="form-control" type="number" placeholder="موديل السيارة" ng-model="agentForm.carModel" required>
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.orderType.$error.required" class="error-block">يجب اختيار موديل السيارة</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.carModel.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-car"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="carColor" class="form-control" type="text" placeholder="لون السيارة" ng-model="agentForm.carColor" required />
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.carColor.$error.required" class="error-block">يجب اختيار لون السيارة</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.carTapletteNumber.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-car"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input name="carTapletteNumber" class="form-control" type="text" placeholder="رقم لوحة السيارة" ng-model="agentForm.carTapletteNumber" required />
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.carTapletteNumber.$error.required" class="error-block">يجب اختيار رقم لوحة السيارة</p>
+                </li>
+                <li>
+                    <a href="#" data-open-in="picker" data-picker-close-text="إغلاق" class="item-link smart-select" data-back-on-select="true">
+                        <select ng-model="agentForm.passengerCount" name="passenger" data-ng-options="passenger as passenger.name for passenger in passengers" required>
+                            <option value="" selected disabled>عدد ركاب السيارة</option>
+                        </select>
+                        <div class="item-content" ng-class="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.passengerCount.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-android-car"></i></div>
+                            <div class="item-inner"> </div>
+                        </div>
+                        <p ng-show="submittedAgentSignup && signUpAgentReset && $parent.SignupAgentForm.passengerCount.$error.required" class="error-block">يجب اختيار عدد ركاب السيارة</p>
+                    </a>
+                </li>
+                <!-- Single chekbox item -->
+                <li>
+                    <label class="label-checkbox item-content">
+                        <input type="checkbox" name="chk1"  />
+
+                        <div class="item-media" ng-click="TermsAccepted(user.isChecked)">
+                            <i class="icon icon-form-checkbox"></i>
+                        </div>
+                        <div class="item-inner">
+                            <a ng-click="GoToTerms()"><div class="item-title">موافقة على الشروط والأحكام</div></a>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+            <p>
+                <button type="submit" class="button fullWidth button-big button-fill green" ng-click="submittedAgentSignup=true" ng-show="user.isChecked"><i class="ionicons ion-person-add"></i>تسجيل حساب </button>
+            </p>
+            <p>
+                <button ng-click="GoBack()" class="button fullWidth button-big button-fill green">عودة</button>
+            </p>
+        </form>
+    </div>
+</div>

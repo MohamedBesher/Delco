@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Saned.Delco.Api.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UploadPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/Uploads/</Value>
+    </Setting>
+    <Setting Name="SmsUrl" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://sms.gateway.sa/api/sendsms.php?username=yssar&amp;password=134679Yy&amp;message={0}&amp;numbers={1}&amp;sender=DELCO&amp;unicode=e&amp;Rmduplicated=1&amp;return=xml</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,186 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            طلباتى
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="subnavbar">
+    <!-- Buttons row as tabs controller in Subnavbar-->
+    <div class="buttons-row">
+        <!-- Link to 1nd tab --><a href="#agentUnderWayOrders" class="button active tab-link">قيد التنفيذ</a>
+        <!-- Link to 2nd tab --><a href="#agentExcutedOrders" class="button tab-link">المنفذة</a>
+        <!-- Link to 3nd tab --><a href="#agentDeletedOrders" class="button tab-link">المحذوفة</a>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+    <div class="tabs-swipeable-wrap ">       
+            <div id="divInfiniteAgentOrders" class="page-content infinite-scroll pull-to-refresh-content">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                </div>
+                <!-- Tabs, tabs wrapper -->
+                <div class="tabs">
+                    <!-- Tab 1 -->
+                    <div id="agentUnderWayOrders" class="page-content active tab profile">
+
+                        <div class="content-block">
+                            <!--<div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ionicons ion-android-search"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="بحث">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>-->
+
+                            <div class="card blue" ng-repeat="underWayOrder in agentUnderWayOrders track by underWayOrder.id">
+                                <div class="row">
+                                    <div class="col-20">
+                                        <a href="#showOrderDetails1">
+                                            <img src="img/1.png" width="100%" />
+                                        </a>
+                                        <!--<img src="img/2.png" width="100%" />-->
+                                        <!--<img src="img/3.png" width="100%" />-->
+                                        <!--<img src="img/4.png" width="100%" />-->
+                                    </div>
+                                    <div class="col-80">
+                                        <a ng-click="goToOrderDetails(underWayOrder)">
+                                            <h3>{{underWayOrder.agentOrderName}}</h3>
+                                            <p><i class="ion-android-person"></i> {{underWayOrder.userName}}</p>
+                                            <p><i class="ion-android-pin"></i> {{underWayOrder.address}}</p>
+                                            <p><i class="ion-cash"></i> {{underWayOrder.price}}</p>
+                                        </a>
+
+                                    </div>
+
+                                    <div class="call" ng-click="clientCall()">
+                                        <a href="#">
+                                            <i class="ionicons ion-android-call"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div id="infiniteLoaderAgentTripsTab" class="infiniteLoader infinite-scroll-preloader" ng-show="agentUnderWayOrdersTabInfiniteLoader">
+                                <img ng-src="img/load.svg" />
+                            </div>-->
+                            <div id="divNotificationuserNameNewOrders" class="divAlertDesc" ng-show="agentOrdersUnderWayDivAlert">
+                                <p class="pNotification">{{agentOrdersUnderWayAlert}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Tab 2 -->
+                    <div id="agentExcutedOrders" class="page-content tab profile">
+
+                        <div class="content-block">
+                            <!--<div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ionicons ion-android-search"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="بحث">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>-->
+                            <div class="card yellow" ng-repeat="excutedOrder in agentExcutedOrders track by excutedOrder.id">
+                                <div class="row">
+                                    <div class="col-20">
+                                        <a href="#showOrderDetails2">
+                                            <img src="img/4.png" width="100%" />
+                                        </a>
+                                        <!--<img src="img/2.png" width="100%" />-->
+                                        <!--<img src="img/3.png" width="100%" />-->
+                                        <!--<img src="img/4.png" width="100%" />-->
+                                    </div>
+                                    <div class="col-80">
+                                        <a ng-click="goToOrderDetails(excutedOrder)">
+                                            <h3>{{excutedOrder.agentOrderName}}</h3>
+                                            <p><i class="ion-android-person"></i> {{excutedOrder.userName}}</p>
+                                            <p><i class="ion-android-pin"></i> {{excutedOrder.address}}</p>
+                                            <p><i class="ion-cash"></i> {{excutedOrder.price}}</p>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div id="infiniteLoaderAgentTripsTab" class="infiniteLoader infinite-scroll-preloader" ng-show="agentExcutedOrdersTabInfiniteLoader">
+                                <img ng-src="img/load.svg" />
+                            </div>-->
+                            <div id="divNotificationuserNameNewOrders" class="divAlertDesc" ng-show="agentOrdersExcutedDivAlert">
+                                <p class="pNotification">{{agentOrdersExcutedAlert}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Tab 3 -->
+                    <div id="agentDeletedOrders" class="page-content tab profile">
+
+                        <div class="content-block">
+                            <!--<div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ionicons ion-android-search"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="بحث">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>-->
+
+
+                            <div class="card yellow" ng-repeat="deletedOrder in agentDeletedOrders">
+                                <div class="row">
+                                    <div class="col-20">
+                                        <a href="#showOrderDetails2">
+                                            <img src="img/4.png" width="100%" />
+                                        </a>
+                                        <!--<img src="img/2.png" width="100%" />-->
+                                        <!--<img src="img/3.png" width="100%" />-->
+                                        <!--<img src="img/4.png" width="100%" />-->
+                                    </div>
+                                    <div class="col-80">
+                                        <a ng-click="goToOrderDetails(deletedOrder)">
+                                            <h3>{{deletedOrder.agentOrderName}}</h3>
+                                            <p><i class="ion-android-person"></i> {{deletedOrder.userName}}</p>
+                                            <p><i class="ion-android-pin"></i> {{deletedOrder.address}}</p>                                         
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div id="infiniteLoaderAgentTripsTab" class="infiniteLoader infinite-scroll-preloader" ng-show="agentDeletedOrdersTabInfiniteLoader">
+                                <img ng-src="img/load.svg" />
+                            </div>-->
+                            <div id="divNotificationuserNameNewOrders" class="divAlertDesc" ng-show="agentOrdersDeletedDivAlert">
+                                <p class="pNotification">{{agentOrdersDeletedAlert}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+</div>

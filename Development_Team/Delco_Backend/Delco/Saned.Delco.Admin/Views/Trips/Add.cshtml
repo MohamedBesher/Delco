@@ -1,0 +1,60 @@
+﻿@model Saned.Delco.Admin.Models.InternalPathViewModel
+
+@{
+    ViewBag.Title = "اضافة مسار داخلى";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card-box">
+
+
+
+            <h4 class="header-title m-t-0 m-b-30">اضافة مسار خارجى</h4>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    @using (Html.BeginForm("Add", "InternalPaths", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FromCityId, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.FromCityId,
+                                    new SelectList(ViewBag.cities, "Id", "Name"), "--اختر المدينة--", new { @class = "form-control", id = "FromCityId" })
+
+                                @Html.ValidationMessageFor(model => model.FromCityId, null, new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Price, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Price, null, new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+
+                            <button type="submit" class="btn btn-purple waves-effect waves-light">حفظ</button>
+
+
+
+                    }
+
+                </div><!-- end col -->
+
+
+
+            </div><!-- end row -->
+        </div>
+    </div><!-- end col -->
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")

@@ -1,0 +1,229 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            طلباتى
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+
+<div class="subnavbar">
+    <!-- Buttons row as tabs controller in Subnavbar-->
+    <div class="buttons-row">
+        <!-- Link to 1st tab, active --><a href="#UserOfferedOrders" class="button active tab-link">المعروضة</a>
+        <!-- Link to 2nd tab --><a href="#UserunderWayOrders" class="button tab-link">قيد التنفيذ</a>
+        <!-- Link to 3nd tab --><a href="#userExcutedOrders" class="button tab-link">المنفذة</a>
+        <!-- Link to 4nd tab --><a href="#userDeletedOrders" class="button tab-link">المحذوفة</a>
+    </div>
+</div>
+
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="tabs-swipeable-wrap">
+    <div id="divInfiniteUserOrders" class="page-content infinite-scroll pull-to-refresh-content">
+        <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+        </div>
+        <!-- Tabs, tabs wrapper -->
+        <div class="tabs ">
+            <!-- Tab 1, active by default -->
+            <div id="UserOfferedOrders" class="page-content tab active">
+                <div class="content-block">
+                    <!--<div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ionicons ion-android-search"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="بحث">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>-->
+
+                    <div class="card blue" ng-repeat="userOfferedOrder in userOfferedOrders">
+                        <div class="row">
+                            <div class="col-20">
+                                <a href="#showOrderDetails1">
+                                    <img src="img/1.png" width="100%" />
+                                </a>
+                                <!--<img src="img/2.png" width="100%" />-->
+                                <!--<img src="img/3.png" width="100%" />-->
+                                <!--<img src="img/4.png" width="100%" />-->
+                            </div>
+                            <div class="col-80">
+                                <a ng-click="goToOrderDetails(userOfferedOrder)">
+                                    <h3>{{userOfferedOrder.userOrderName}}</h3>
+                                    <p><i class="ion-android-pin"></i>{{userOfferedOrder.toLocation}} </p>
+                                </a>
+
+                                <div class="cancel">
+                                    <a ng-click="cancelOrder(userOfferedOrder.id)" class="cancel-reason">
+                                        <i class="ionicons ion-close-circled"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div id="infiniteLoaderAgentTripsTab" class="infiniteLoader infinite-scroll-preloader" ng-show="userOfferedOrdersTabInfiniteLoader">
+                        <img ng-src="img/load.svg" />
+                    </div>-->
+                    <div id="divNotificationUserNewOrders" class="divAlertDesc" ng-show="userOrdersOfferedDivAlert">
+                        <p class="pNotification">{{userOrdersOfferedAlert}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Tab 2 -->
+            <div id="UserunderWayOrders" class="page-content tab profile">
+                <div class="content-block">
+                    <!--<div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ionicons ion-android-search"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="بحث">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>-->
+
+                    <div class="card blue" ng-repeat="userUnderWayOrder in userUnderWayOrders ">
+                        <div class="row">
+                            <div class="col-20">
+                                <a href="#showOrderDetails1">
+                                    <img src="img/1.png" width="100%" />
+                                </a>
+                                <!--<img src="img/2.png" width="100%" />-->
+                                <!--<img src="img/3.png" width="100%" />-->
+                                <!--<img src="img/4.png" width="100%" />-->
+                            </div>
+                            <div class="col-80">
+                                <a  ng-click="goToOrderDetails(userUnderWayOrder)">
+                                    <h3>{{userUnderWayOrder.userOrderName}}</h3>
+                                    <p><i class="ion-android-person"></i> {{userUnderWayOrder.agentFullName}}</p>
+                                    <p><i class="ion-android-pin"></i> {{userUnderWayOrder.toLocation}}</p>
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <div class="cancel">
+                            <a ng-click="cancelOrder(userUnderWayOrder.id)" class="cancel-reason">
+                                <i class="ionicons ion-close-circled"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--<div id="infiniteLoaderAgentTripsTab" class="infiniteLoader infinite-scroll-preloader" ng-show="userUnderWayOrdersTabInfiniteLoader">
+                        <img ng-src="img/load.svg" />
+                    </div>-->
+                    <div id="divNotificationUserNewOrders" class="divAlertDesc" ng-show="userOrdersUnderWayDivAlert">
+                        <p class="pNotification">{{userOrdersUnderWayAlert}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Tab 3 -->
+            <div id="userExcutedOrders" class="page-content tab profile">
+                <div class="content-block">
+                    <!--<div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ionicons ion-android-search"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="بحث">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>-->
+
+                    <div class="card blue" ng-repeat="userExcutedOrder in userExcutedOrders">
+                        <div class="row">
+                            <div class="col-20">
+                                <a href="#showOrderDetails1">
+                                    <img src="img/1.png" width="100%" />
+                                </a>
+                                <!--<img src="img/2.png" width="100%" />-->
+                                <!--<img src="img/3.png" width="100%" />-->
+                                <!--<img src="img/4.png" width="100%" />-->
+                            </div>
+                            <div class="col-80">
+                                <a  ng-click="goToOrderDetails(userExcutedOrder)">
+                                    <h3>{{userExcutedOrder.userOrderName}}</h3>
+                                    <p><i class="ion-android-person"></i>{{userExcutedOrder.agentFullName}} </p>
+                                    <p><i class="ion-android-pin"></i> {{userExcutedOrder.toLocation}}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div id="infiniteLoaderAgentTripsTab" class="infiniteLoader infinite-scroll-preloader" ng-show="userExcutedOrdersTabInfiniteLoader">
+                        <img ng-src="img/load.svg" />
+                    </div>-->
+                    <div id="divNotificationUserNewOrders" class="divAlertDesc" ng-show="userOrdersExcutedDivAlert">
+                        <p class="pNotification">{{userOrdersExcutedAlert}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Tab 4 -->
+            <div id="userDeletedOrders" class="page-content tab profile">
+                <div class="content-block">
+                    <!--<div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="ionicons ion-android-search"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" placeholder="بحث">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>-->
+
+                    <div class="card blue" ng-repeat="userDeletedOrder in userDeletedOrders">
+                        <div class="row">
+                            <div class="col-20">
+                                <a href="#showOrderDetails1">
+                                    <img src="img/1.png" width="100%" />
+                                </a>
+                                <!--<img src="img/2.png" width="100%" />-->
+                                <!--<img src="img/3.png" width="100%" />-->
+                                <!--<img src="img/4.png" width="100%" />-->
+                            </div>
+                            <div class="col-80">
+                                <a  ng-click="goToOrderDetails(userDeletedOrder)">
+                                    <h3>{{userDeletedOrder.userOrderName}}</h3>
+                                    <p><i class="ion-android-person"></i> {{userDeletedOrder.agentFullName}}</p>
+                                    <p><i class="ion-android-pin"></i> {{userDeletedOrder.toLocation}}</p>
+                                    <p></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div id="infiniteLoaderAgentTripsTab" class="infiniteLoader infinite-scroll-preloader" ng-show="userDeletedOrdersTabInfiniteLoader">
+                        <img ng-src="img/load.svg" />
+                    </div>-->
+                    <div id="divNotificationUserNewOrders" class="divAlertDesc" ng-show="userOrdersDeletedDivAlert">
+                        <p class="pNotification">{{userOrdersDeletedAlert}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

@@ -1,0 +1,202 @@
+@font-face {
+    font-family: 'Kufi';
+    src: url('../fonts/DroidKufi-Regular.eot');
+    src: url('../fonts/DroidKufi-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/DroidKufi-Regular.woff') format('woff'), url('../fonts/DroidKufi-Regular.ttf') format('truetype'), url('../fonts/DroidKufi-Regular.svg#AnimalsNormal') format('svg');
+}
+
+/*************************************************************************************/
+
+body {
+    font-family: 'kufi',Tahoma;
+  height: 100vh;
+  background: url("../img/bg.jpg") center center no-repeat;
+  background-size:cover;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(359deg);
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}
+
+.login {
+  border-radius: 2px 2px 5px 5px;
+  padding: 100px 20px 20px 20px;
+  width: 90%;
+  max-width: 320px;
+  background: #ffffff;
+  position: relative;
+  padding-bottom: 80px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+}
+.login.loading a.submit {
+  max-height: 100%;
+  padding-top: 50px;
+}
+.login.loading a.submit .spinner {
+  opacity: 1;
+  top: 40%;
+}
+.login.ok a.submit {
+  background-color: #303038;
+}
+.login.ok a.submit .spinner {
+  border-radius: 0;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  height: 20px;
+  animation: none;
+  transform: rotateZ(-45deg);
+}
+.login input {
+  display: block;
+  padding: 15px 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  transition: border-width 0.2s ease;
+  border-radius: 2px;
+  color: #ccc;
+    text-align: right;
+}
+.login input + i.fa {
+  color: #fff;
+  font-size: 1em;
+  position: absolute;
+  margin-top: -45px;
+  opacity: 0;
+  right: 0;
+  transition: all 0.1s ease-in;
+}
+.login input:focus {
+  outline: none;
+  color: #444;
+  border-color: #303038;
+  border-right-width: 45px;
+}
+.login input:focus + i.fa {
+  opacity: 1;
+  right: 35px;
+  transition: all 0.25s ease-out;
+}
+.login input.forget {
+  font-size: 0.8em;
+  color: #303038;
+  text-decoration: none;
+}
+.login .title {
+        color: #444;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px auto 30px auto;
+    border-bottom: 1px solid #eee;
+    padding: 25px;
+    background: #303038;
+    width: 40%;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: -75px;
+    right: 94px;
+    text-align: center;
+    box-shadow: 0px 4px 0px 0px #ccc;
+}
+
+.login .title img{
+  width:100%;
+}
+.login input.submit {
+      width: 100%;
+    height: 100%;
+    padding: 20px 10px;
+    background: #303038;
+    color: #fff;
+    display: block;
+    border: none;
+    margin-top: 20px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-height: 60px;
+    border: 0px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 2px 2px;
+    transform: rotateZ(0deg);
+    transition: all 0.1s ease-out;
+    border-bottom-width: 7px;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.login input.submit .spinner {
+  display: block;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  border: 4px solid #ffffff;
+  border-top-color: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  left: 50%;
+  top: 0;
+  opacity: 0;
+  margin-left: -20px;
+  margin-top: -20px;
+  animation: spinner 0.6s infinite linear;
+  transition: top 0.3s 0.3s ease, opacity 0.3s 0.3s ease, border-radius 0.3s ease;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+}
+.login:not(.loading) input.submit:hover {
+  box-shadow: 0px 1px 3px #303038;
+}
+.login:not(.loading) input.submit:focus {
+  border-bottom-width: 4px;
+}
+
+footer {
+  display: block;
+  padding-top: 50px;
+  text-align: center;
+  color: #ddd;
+  font-weight: normal;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+  font-size: 0.8em;
+}
+footer a, footer a:link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.login .text-danger {
+    position: relative;
+    top: -10px;
+    font-size: 12px;
+    color: #f00;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: #000 !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+.field-validation-valid {
+    display: none;
+}
+.form-group {
+    margin-bottom: 15px;
+    overflow: hidden;
+}

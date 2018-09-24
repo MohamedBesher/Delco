@@ -1,0 +1,84 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            البيانات الشخصية
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content" ng-model="agent">
+    <div class="content-block">
+        <img src="img/avatar.png" class="profile_pic">
+        <div class="card">
+            <div class="row">
+                <div ng-show="IsNameExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-person"></i> الاسم (كما في بطاقة الأحوال): </b><span>{{name}}</span></h3>
+                </div>
+                <div ng-show="IsUserNameExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-person"></i> اسم الدخول: </b><span>{{username}}</span></h3>
+                </div>
+                <div ng-show="IsMobileExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-android-phone-portrait"></i> رقم الجوال: </b><span>{{mobile}}</span></h3>
+                </div>
+                <div ng-show="IsEmailExists" class="col-100">
+                    <h3><b><i class="ionicons ion-android-mail"></i> البريد الإلكترونى: </b><span>{{email}}</span></h3>
+                </div>
+            </div>
+        </div>
+        <h3>بيانات السيارة</h3>
+        <div class="card">
+            <div class="row">
+                <div ng-show="IsCompanyNameExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-android-car"></i> شركة السيارة: </b><span>{{companyName}}</span></h3>
+                </div>
+                <div ng-show="IsModelExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-android-car"></i> نوع السيارة: </b><span>{{model}}</span></h3>
+                </div>
+                <div ng-show="IsCarTypeExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-android-car"></i> موديل السيارة: </b><span>{{carType}}</span></h3>
+                </div>
+                <div ng-show="IsColorExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-android-car"></i> لون السيارة: </b><span>{{color}}</span></h3>
+                </div>
+                <div ng-show="IsPlateNumberExists" class="col-100">
+                    <h3><b><i class="ionicons ion-android-car"></i> رقم لوحة السيارة: </b><span>{{plateNumber}}</span></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="row">
+                <div class="col-100">
+                    <h3 class="txt">
+                        <b><i class="ionicons ion-android-list"></i> تقييم المستخدمين بناءاً على الطلبات المنفذة: </b>
+                        <jk-rating-stars max-rating="5" rating="rate" read-only="true"></jk-rating-stars>
+                    </h3>
+                </div>
+                <div class="col-100" ng-show="IsAgentExecutedOrdersExists">
+                    <h3><b><i class="ionicons ion-android-list"></i> عدد الطلبات المنفذة: </b><span>{{agentOrderExcuted}}</span></h3>
+                </div>
+            </div>
+        </div>
+
+        <h3>الحسابات المالية</h3>
+        <div class="card">
+            <div class="row">
+                <div class="col-100" ng-show="IsAgentPriceExists">
+                    <h3 class="txt"><b><i class="ionicons ion-cash"></i> إجمالى قيمة التوصيل: </b><span> {{agntPrice}} ريال</span></h3>
+                </div>
+                <div class="col-100" ng-show="IsManagementRatioExists">
+                    <h3 class="txt"><b><i class="ionicons ion-cash"></i> نسبة الإدارة: </b><span> {{ManagementRatio}} ريال</span></h3>
+                </div>
+                <div class="col-100" ng-show="IsNetProfitExists">
+                    <h3><b><i class="ionicons ion-cash"></i> صافى الربح بعد خصم نسبة الإدارة: </b><span> {{NetProfit}} ريال</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

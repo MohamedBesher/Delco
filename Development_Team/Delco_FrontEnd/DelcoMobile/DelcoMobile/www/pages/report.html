@@ -1,0 +1,51 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            إبلاغ عن إساءة
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="content-block">
+        <div class="list-block">
+            <form name="$parent.ReportForm" ng-submit="submitForm($parent.ReportForm.$valid)" novalidate>
+                <ul>
+                    <li>
+                        <div class="item-content" ng-class="submittedReport && reportReset && $parent.ReportForm.title.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-android-mail"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input name="title" class="form-control" type="text" placeholder="عنوان البلاغ" ng-model="reportForm.title" required />
+                                </div>
+                            </div>
+                        </div>
+                        <p ng-show="submittedReport && reportReset  && $parent.ReportForm.message.$error.required" class="error-block">يجب إدخال عنوان البلاغ</p>
+                    </li>
+                    <li>
+                        <div class="item-content textarea" ng-class="submittedReport && reportReset && $parent.ReportForm.message.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-android-mail"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <textarea name="message" class="form-control" type="text" placeholder="نص البلاغ" ng-model="reportForm.message" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <p ng-show="submittedReport && reportReset  && $parent.ReportForm.message.$error.required" class="error-block">يجب إدخال نص البلاغ</p>
+                    </li>
+                </ul>
+                <p>
+                    <button type="submit" href="#" class="button fullWidth button-big button-fill darkGreen" ng-click="submittedReport=true"><i class="ionicons ion-checkmark-round"></i>إرسال </button>
+                </p>
+            </form>
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,132 @@
+﻿
+@using PagedList.Mvc
+@using Saned.Delco.Admin.Extensions
+
+@model PagedList.IPagedList<Saned.Delco.Data.Core.Models.Path>
+
+
+
+
+
+    <div class="row">
+        <table id="datatable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>م</th>
+                    <th>من</th>
+                    <th>الى</th>
+                    <th>السعر</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @if (Model.Count > 0)
+            {
+            int counter = 0;
+            foreach (var item in Model)
+            {
+                counter++;
+                <tr>
+                    <td>@counter</td>
+                    <td>
+                        @item.FromCity.Name
+                    </td>
+                    <td>
+
+
+                        @item.ToCity.Name
+
+                    </td>
+
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        <a title="تعديل" href="@(Url.Action("Edit", "ExternalPaths", new {id = item.Id}))" class="btn btn-primary"><i title="تعديل" class="fa fa-pencil"></i></a>
+
+                        @Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                            "Delete", "ExternalPaths",
+                            new {Id = item.Id, Page = ViewBag.Page, FromCityId = ViewBag.FromCityId, ToCityId = ViewBag.ToCityId, PageSize = ViewBag.PageSize},
+                            new AjaxOptions
+                            {
+                                Confirm = "هل انت متأكد انك تريد حذف المسار ؟",
+                                UpdateTargetId = "searchResult",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "POST",
+                                LoadingElementId = "ajaxLoaderDiv",
+                                OnSuccess = "onsuccessDeletion",
+                                OnFailure = "onFailureDeletion"
+                            },
+                            new {@class = "btn btn-danger"})
+
+
+
+
+                    </td>
+
+
+                </tr>
+                }
+            }
+
+            else
+            {
+                <tr>
+                    <td colspan="5"><strong> لا يوجد مسارات  .</strong> </td>
+                </tr>}
+
+
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="dataTables_info">
+                Showing @ViewBag.ResultCount entries
+
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                @Html.PagedListPager(Model,
+                page => Url.Action("Search", new { page = page, keyword = ViewBag.keyword, IsApproved = ViewBag.IsApproved }),
+                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv", OnSuccess = "pagingSuccess" }))
+            </div> 
+           
+        </div>
+</div>
+
+
+
+
+
+
+
+    <script>
+        function onsuccessDeletion(data) {
+
+            NotificationService.displaySuccess("تم الحذف بنجاح");
+           
+        }
+        function onFailureDeletion(jqXHR, textStatus, errorThrown) {
+
+            if (jqXHR.statusText == "NotFound")
+                NotificationService.displayError("هذا المسار غير موجود");
+            else
+                NotificationService.displayError("حدث خطأ أثناء الحذف .");
+
+
+        }
+
+    </script>
+
+                   

@@ -1,0 +1,271 @@
+﻿@using Saned.Delco.Admin.Extensions
+@using Saned.Delco.Data.Core.Enum
+@model Saned.Delco.Admin.Models.AgentViewModel
+
+@{
+    ViewBag.Title = "تفاصيل طلب المندوب";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card-box">
+    <h4 class="header-title m-t-0 m-b-30">
+
+        تفاصيل طلب المندوب
+    </h4>
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="m-b-30 m-t-0 header-title"><b></b></h4>
+            <form action="#" class="form-horizontal">
+
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">اسم المستخدم</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.UserName, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">الاسم بالكامل</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.FullName, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">البريد الالكترونى</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.Email, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">رقم الجوال</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.PhoneNumber, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">المدينة</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.Cityname, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">نوع الطلبات المفضلة </label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.TypeRequest, new { @class = "col-sm-5 control-label" })
+
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">شركة السيارة</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.CompanyName, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">نوع السيارة</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.Model, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">موديل السيارة</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.Type, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">لون السيارة</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.Color, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">رقم لوحة السيارة</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+                        @Html.DisplayFor(model => model.PlateNumber, new { @class = "col-sm-5 control-label" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">عدد الركاب</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+
+                        @Html.DisplayFor(model => model.PassengerNumber, new { @class = "col-sm-5 control-label" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">تقيم المندوب</label>
+                    <div class="col-sm-7" style="padding-top:8px">
+
+                        @Html.DisplayFor(model => model.Rate, new { @class = "col-sm-5 control-label" })
+                    </div>
+                </div>
+
+                
+                
+                
+                
+                
+                @*@using (Html.BeginForm("ApproveAgent", "User", FormMethod.Post, new {  }))
+                {
+                    @Html.HiddenFor(model => model.Id)
+                    <button type="submit" class="btn btn-success"><i title='موافقة' class='fa fa-check'></i> موافقة</button>
+
+
+
+                }
+                @using (Html.BeginForm("Destroy", "User", FormMethod.Post, new {  }))
+                {
+                    @Html.HiddenFor(model => model.Id)
+                    <button type="submit" class="btn btn-danger"><i title='رفض' class='fa fa-times'></i> رفض</button>
+
+
+                    
+                }*@
+
+                <a title="موافقة" class="btn btn-success" onclick="approveAgent(this,'@Model.Id')"><i title='موافقة' class='fa fa-check'></i> موافقة</a>
+                <a title="رفض" class="btn btn-danger" onclick="deleteAccount(this,'@Model.Id')"><i title='رفض' class='fa fa-times'></i> رفض </a>
+                
+                
+
+                @*@Ajax.RawActionLink(string.Format("<i title='موافقة' class='fa fa-check'></i> موافقة "),
+                    "ApproveAgent", "User",
+                    new
+                    {
+                        id = Model.Id
+                    },
+                    new AjaxOptions
+                    {
+
+                        HttpMethod = "POST",
+                        LoadingElementId = "ajaxLoaderDiv",
+
+                    },
+                    new { @class = "btn btn-success" })
+
+                
+                @Ajax.RawActionLink(string.Format("<i title='رفض' class='fa fa-times'></i> رفض"),
+                    "Destroy", "User",
+                    new
+                    {
+                        id = Model.Id
+                    },
+                    new AjaxOptions
+                    {
+
+                        HttpMethod = "POST",
+                        LoadingElementId = "ajaxLoaderDiv",
+
+
+                    },
+                    new { @class = "btn btn-danger" })*@
+
+
+
+
+            </form>
+            
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+
+    function approveAgent(btn, id) {
+        $(btn).prop("disabled", true);
+
+       // $.blockUI();
+        debugger;
+        $.ajax({
+            type: 'POST',
+            url: '/User/ApproveAgent/' + id,
+            contentType: "application/json",
+          //  data: { id: id },
+            dataType: "json",
+            success: function (data) {
+                if (data === "OK") {
+                    NotificationService.displaySuccess("تم قبول المندوب بنجاح.");
+                }
+                else if (data === "NotFound") {
+                    NotificationService.displaySuccess("هذا المندوب غير موجود .");
+                } else {
+                    NotificationService.displayError("حدث خطأ أثناء قبول المندوب .");
+                }
+                window.location.href="@Url.Action("AgentsRequest","User")";
+              
+
+            },
+            error: function (requestObject, error, errorThrown) {
+                NotificationService.displayError("حدث خطأ أثناء قبول المندوب .");
+                window.location.href="@Url.Action("AgentsRequest","User")";
+               // $.unblockUI();
+            }
+        });
+
+        return false;
+    };
+
+
+    function deleteAccount(btn,id) {
+        $(btn).prop("disabled", true);
+  
+        $.ajax({
+            type: 'POST',
+            url: '/User/DestroyAgentbyId/' + id,
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                if (data === "OK") {
+                    NotificationService.displaySuccess("تم حذف المندوب بنجاح.");
+                }
+                else if (data=== "NotFound") {
+                    NotificationService.displaySuccess("هذا المندوب غير موجود .");
+                } else {
+                    NotificationService.displayError("حدث خطأ أثناء حذف المندوب .");
+                }             
+                window.location.href="@Url.Action("AgentsRequest","User")";                            
+            },
+            error: function (requestObject, error, errorThrown) {
+                NotificationService.displayError("حدث خطأ أثناء حذف المندوب.");
+            
+            }
+        });
+
+        return false;
+    };
+</script>

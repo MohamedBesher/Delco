@@ -1,0 +1,98 @@
+﻿
+
+
+<div id="flash-messages" class="alert-message" style="display:none;">
+
+    <a class="close" href="#!">&times;</a>
+
+
+    <p></p>
+
+
+
+
+</div>
+
+
+<style>
+    
+
+    .alert-message.success {
+        background: #2ecc71;
+    color: #fff;
+    padding: 1em;
+    position: fixed;
+    right: 3em;
+    width: 20%;
+    z-index: 9999;
+    bottom: 3em;
+}
+
+.alert-message.danger {
+    background: #e74c3c;
+    color: #fff;
+    padding: 1em;
+    position: fixed;
+    right: 3em;
+    width: 20%;
+    z-index: 9999;
+    bottom: 3em;
+}
+
+.alert-message.error {
+    background: #e74c3c;
+    color: #fff;
+    padding: 1em;
+    position: fixed;
+    right: 3em;
+    width: 20%;
+    z-index: 9999;
+    bottom: 3em;
+}
+
+.alert-message.info {
+    background: #3498db;
+    color: #fff;
+    padding: 1em;
+}
+
+.alert-message p {
+    font-family: 'kufi',Tahoma;
+    padding-right: 20%;
+}
+
+.alert-message.success p {
+    margin: 0px;
+}
+
+.alert-message.danger p {
+    margin: 0px;
+}
+
+.alert-message.error p {
+    margin: 0px;
+}
+
+.alert-message.info p {
+    margin: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+    
+
+
+
+    $(function () {
+        $("#flash-messages").flashMessage();
+    });
+</script>
+
+
+
+
+
+
+
+

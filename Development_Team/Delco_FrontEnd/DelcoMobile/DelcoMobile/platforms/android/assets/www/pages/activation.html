@@ -1,0 +1,29 @@
+﻿<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="logo-cont"> <img src="img/logo.png" /> </div>
+    <div class="list-block">
+        <form name="$parent.ActivationForm" ng-submit="submitForm($parent.ActivationForm.$valid)" novalidate>
+            <ul>
+                <li>
+                    <div class="item-content" ng-class="submittedActivation && $parent.ActivationForm.code.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="كود التفعيل" name="code" ng-model="activationForm.code" required>
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedActivation && $parent.ActivationForm.code.$error.required" class="error-block">يجب إدخال الكود</p>
+                </li>
+            </ul>
+            <p>
+                <button type="submit" ng-click="submittedActivation=true" class="button fullWidth button-big button-fill green"><i class="ionicons ion-android-mail"></i>إرسال</button>
+            </p>
+            <p>
+                <button type="button" ng-click="ResendConfirmationCode()" class="button fullWidth button-big button-fill white_green"><i class="ionicons ion-android-lock"></i>إعادة إرسال كود التفعيل</button>
+            </p>
+        </form>
+    </div>
+</div>

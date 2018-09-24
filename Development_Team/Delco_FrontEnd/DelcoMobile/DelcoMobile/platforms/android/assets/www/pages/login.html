@@ -1,0 +1,57 @@
+﻿<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="logo-cont">
+        <img src="img/logo.png" />
+    </div>
+    <div class="list-block">
+        <form name="$parent.LoginForm" ng-submit="submitForm($parent.LoginForm.$valid)" novalidate>
+            <ul>
+                <li>
+                    <div class="item-content" ng-class="submittedLogin && loginReset && $parent.LoginForm.username.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-person"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" class="form-control" name="username" placeholder="اسم المستخدم" ng-model="loginForm.username" required>
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedLogin && loginReset && $parent.LoginForm.username.$error.required" class="error-block">يجب إدخال اسم المستخدم</p>
+                </li>
+                <li>
+                    <div class="item-content" ng-class="submittedLogin && loginReset && $parent.LoginForm.password.$invalid?'has-error':'no-error'">
+                        <div class="item-media"><i class="ionicons ion-android-lock"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="password" class="form-control" name="password" placeholder="كلمة المرور" ng-model="loginForm.password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-show="submittedLogin && loginReset && $parent.LoginForm.password.$error.required" class="error-block">يجب إدخال كلمة السر</p>
+                </li>
+            </ul>
+
+
+            <a href="#" ng-click="GoToForgetPassword()"><p class="txt">نسيت كلمة المرور ؟</p></a>
+            <p>
+                <button id="btnLogin" type="submit" class="button fullWidth button-big button-fill green" ng-click="submittedLogin=true"><i class="ionicons ion-log-in"></i>تسجيل الدخول</button>
+            </p>
+            <!--<p><a href="#indexUser" class="button button-big button-fill green"><i class="ionicons ion-log-in"></i>تسجيل الدخول للمستخدم </a></p>
+            <p><a href="#indexMandob" class="button button-big button-fill green"><i class="ionicons ion-log-in"></i>تسجيل الدخول للمندوب </a></p>
+            <p><a href="#" class="open-modal button button-big button-fill green"><i class="ionicons ion-log-in"></i>تسجيل الدخول للمندوب المحظور </a></p>-->
+            <p>
+                <a ng-click="GoToUsers()" href="#users" class="button button-big button-fill white_green"><i class="ionicons ion-person-add"></i>تسجيل حساب جديد</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+<!-- modal popover -->
+<div id="popupSuspend" class="popover">
+    <div class="popover-inner">
+        <p>{{suspendMessage}}</p>
+        <p>يمكنك التواصل معنا من خلال صفحة تواصل معنا فى التطبيق</p>
+        <p> <a ng-click="GoToContactUs()" class="button button-big button-fill darkGreen close-popover"><i class="ionicons ion-android-mail"></i>تواصل معنا </a> </p>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            بيانات طلب جديد
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="content-block">
+        <div class="list-block">
+            <form name="$parent.AddRequestForm" ng-submit="submitForm($parent.AddRequestForm.$valid)" novalidate>
+                <ul>
+
+                    <li>
+                        <div class="item-content textarea"ng-class="submittedAddRequest && addRequestReset && $parent.AddRequestForm.requestDetails.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-ios-paper-outline"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <textarea type="text" name="requestDetails" placeholder="تفاصيل الطلب" ng-model="addRequestForm.requestDetails" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <p ng-show="submittedAddRequest && addRequestReset && $parent.AddRequestForm.requestDetails.$error.required" class="error-block">يجب ادخال تفاصيل الطلب </p>
+                    </li>
+                    <li>
+                                <div class="item-content"ng-class="submittedAddRequest && addRequestReset && $parent.AddRequestForm.requestDetails.$invalid?'has-error':'no-error'">
+                                    <div class="item-media"><i class="ionicons ion-android-map"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" name="DeliveryAddress" placeholder="عنوان التوصيل" ng-model="addRequestForm.DeliveryAddress"  required>
+                                        </div>
+                                    </div>
+                                    <div ng-click="openRequestMap();" class="item-media">                                     
+                                    <i  class="ionicons ion-android-pin"></i>                                      
+                                    </div>
+
+                                </div>
+                        <p ng-show="submittedAddRequest && addRequestReset && $parent.AddRequestForm.DeliveryAddress.$error.required" class="error-block">يجب ادخال عنوان التوصيل </p>
+                    </li>
+                    <li>
+                        <div class="item-content textarea"ng-class="submittedAddRequest && addRequestReset && $parent.AddRequestForm.requestHomeNumber.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-ios-paper-outline"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <textarea type="text"name="requestHomeNumber" placeholder="اسم الشارع - رقم البيت" ng-model="addRequestForm.requestHomeNumber" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <p ng-show="submittedAddRequest && addRequestReset && $parent.AddRequestForm.requestDetails.$error.required" class="error-block">يجب ادخال اسم الشارع ورقم البيت</p>
+                    </li>
+
+                    <li>
+                        <a id="orderPlace" href="#" data-open-in="picker" data-picker-close-text="إغلاق" class="item-link smart-select" data-back-on-select="true">
+                            <select ng-model="addRequestForm.requestplaceID" ng-change="selectRequestOrderPLace(addRequestForm.requestplaceID)">
+                                <option ng-select="true" ng-disabled="true" value="">مكان الطلب</option>
+                                <option ng-repeat="requestPlace in requestPlaces" value="{{requestPlace.id}}">{{requestPlace.name}}</option>
+                            </select>
+                           
+                            <div class="item-content">
+                                <div class="item-media"><i class="ionicons ion-android-pin"></i></div>
+                                <div class="item-inner"> </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="ionicons ion-cash"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" ng-model="addRequestForm.requestPrice" placeholder="قيمة التوصيل" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <p>تحتسب قيمة التوصيل حسب مكان الطلب</p>
+                    </li>
+                </ul>
+                <p> <button type="submit" ng-click="submittedAddRequest=true" class="button button-big fullWidth button-fill yellow add-text"><i class="ionicons ion-checkmark-round"></i>تأكيد الطلب </button> </p>
+             </form>
+         </div>
+       
+        <!--<p> <a href="#" class="button button-big button-fill red cancel-text"><i class="ionicons ion-android-close"></i>إلغاء الطلب </a> </p>-->
+    </div>
+</div>

@@ -1,0 +1,274 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a href="#" class="link icon-only open-panel"><i class="ionicons ion-android-menu"></i></a>
+            الرئيسية
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div id="divInfiniteHome" class="page-content infinite-scroll pull-to-refresh-content">
+    <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+    </div>
+
+    <div id="divUserPage" ng-hide="userIsAgent">
+        <div class="content-block">
+            <div class="row">
+                <div class="col-50" disabled="disabled">
+                    <a ng-click="GoToAddTrip()">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-100">
+                                    <img src="img/1.png" />
+                                </div>
+                                <div class="col-100">
+                                    <h3>مشوار جديد</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-50">
+                    <a ng-click="GoToAddRequest()">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-100">
+                                    <img src="img/4.png" />
+                                </div>
+                                <div class="col-100">
+                                    <h3>طلب جديد</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h2>طلبات معروضة</h2>
+                <div id="NewOrdersSwiper" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" ng-repeat="order in userNewOrders">
+                            <div class="item">
+                                <div class="card bar">
+                                    <div class="row">
+                                        <div class="col-30">
+                                            <a ng-click="GoToOrderDetails(order)">
+                                                <img data-ng-src="{{ order.photoUrl | generateURL}}" src="../img/square.svg" class="lazy" fallback-src="{{order.fallBackImage}}" />
+                                            </a>
+                                        </div>
+                                        <div class="col-70">
+                                            <a ng-click="GoToOrderDetails(order)">
+                                                <h2>{{order.text}}</h2>
+                                                <div class="row">
+                                                    <div class="col-50">
+                                                        <p><i class="ionicons ion-android-calendar"></i> {{order.day}}</p>
+                                                    </div>
+                                                    <div class="col-50">
+                                                        <p><i class="ionicons ion-android-time"></i> {{order.time}} {{order.timePeriod}}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="cancel">
+                                                <a id="cancelButton" ng-click="CancelOrder(order)" class="cancel-reason">
+                                                    <i class="ionicons ion-close-circled"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="divNotificationUserNewOrders" class="divAlertDesc" ng-show="userNewOrderAlert">
+                    <p class="pNotification">لا يوجد طلبات أو مشاوير معروضة</p>
+                </div>
+            </div>
+
+            <div>
+                <h2>طلبات قيد التنفيذ</h2>
+                <div id="PendingOrdersSwiper" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" ng-repeat="order in userPendingOrders">
+                            <div class="item">
+                                <div class="card bar">
+                                    <div class="row">
+                                        <div class="col-30">
+                                            <a ng-click="GoToOrderDetails(order)">
+                                                <img data-ng-src="{{ order.photoUrl | generateURL}}" src="../img/square.svg" class="lazy" fallback-src="{{order.fallBackImage}}" />
+                                            </a>
+                                        </div>
+                                        <div class="col-70">
+                                            <a ng-click="GoToOrderDetails(order)">
+                                                <h2>{{order.text}}</h2>
+                                                <p><i class="ionicons ion-android-person"></i> {{order.agentFullName}}</p>
+                                                <div class="row">
+                                                    <div class="col-50">
+                                                        <p><i class="ionicons ion-android-calendar"></i> {{order.day}}</p>
+                                                    </div>
+                                                    <div class="col-50">
+                                                        <p><i class="ionicons ion-android-time"></i> {{order.time}} {{order.timePeriod}}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="cancel">
+                                                <a data-popover="#popupSuspende" ng-click="CancelOrder(order)" class="cancel-reason open-popover">
+                                                    <i class="ionicons ion-close-circled"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="divNotificationUserPendingOrders" class="divAlertDesc" ng-show="userPendingOrderAlert">
+                    <p class="pNotification">لا يوجد طلبات أو مشاوير قيد التنفيذ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+
+    <div id="divAgentPage" ng-show="userIsAgent">
+        <div class="content-block">
+            <div class="subnavbar" ng-hide="hasFavoriteType">
+                <div class="buttons-row">
+                    <a href="#agentTripsTab" class="button active tab-link">مشاوير</a>
+                    <a href="#agentRequestsTab" class="button tab-link">طلبات</a>
+                </div>
+            </div>
+            <div id="agentTabsSwiper" class="tabs-swipeable-wrap" ng-hide="hasFavoriteType">
+                <div class="tabs">
+                    <!-- Tab 1 -->
+                    <div id="agentTripsTab" class="page-content tab profile active">
+                        <div class="card bar" ng-repeat="order in agentTripOrders">
+                            <div class="row">
+                                <div class="col-30">
+                                    <img data-ng-src="{{ order.photoUrl | generateURL}}" src="../img/square.svg" class="lazy" fallback-src="{{order.fallBackImage}}" />
+                                </div>
+                                <div class="col-70">
+                                    <h2>{{order.text}}</h2>
+                                    <p><i class="ionicons ion-android-person"></i> {{order.userFullName}}</p>
+                                    <div class="row">
+                                        <div class="col-100">
+                                            <p><i class="ionicons ion-android-pin"></i> {{order.address}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p><a ng-click="GoToOrderDetails(order)" ng-class="{'blue':order.type == 1,'yellow':order.type == 2}" class="button button-big button-fill approve">موافقة على الطلب </a></p>
+                        </div>
+                        <div id="divNotificationAgentTripTab" class="divAlert" ng-show="agentTripTabAlert">
+                            <p class="pNotification">لا يوجد مشاوير</p>
+                        </div>
+                        <!--<div id="infiniteLoaderAgentTripsTab" class="infiniteLoader infinite-scroll-preloader" ng-hide="agentTripTabAlert">
+                            <div class="preloader">
+                                <img ng-src="img/load.svg" />
+                            </div>
+                        </div>-->
+                    </div>
+
+                    <!-- Tab 2 -->
+                    <div id="agentRequestsTab" class="page-content tab profile">
+                        <div class="card bar" ng-repeat="order in agentRequestOrders">
+                            <div class="row">
+                                <div class="col-30">
+                                    <img data-ng-src="{{ order.photoUrl | generateURL}}" src="../img/square.svg" class="lazy" fallback-src="{{order.fallBackImage}}" />
+                                </div>
+                                <div class="col-70">
+                                    <h2>{{order.text}}</h2>
+                                    <p><i class="ionicons ion-android-person"></i> {{order.userFullName}}</p>
+                                    <div class="row">
+                                        <div class="col-100">
+                                            <p><i class="ionicons ion-android-pin"></i> {{order.address}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p><a ng-click="GoToOrderDetails(order)" ng-class="{'blue':order.type == 1,'yellow':order.type == 2}" class="button button-big button-fill approve">موافقة على الطلب </a></p>
+                        </div>
+                        <div id="divNotificationAgentRequestTab" class="divAlert" ng-show="agentRequestTabAlert">
+                            <p class="pNotification">لا يوجد طلبات</p>
+                        </div>
+                        <!--<div id="infiniteLoaderAgentRequestsTab" class="infiniteLoader infinite-scroll-preloader" ng-hide="agentRequestTabAlert">
+                            <div class="preloader">
+                                <img ng-src="img/load.svg" />
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+              
+            </div>
+
+
+
+
+            <!-- لو المندوب بيفضل مشاوير أو طلبات فقط يخفى التبويب بالأعلى ويظهر التالي فقط -->
+            <div class="card bar" ng-repeat="order in agentFavoriteOrders" ng-show="hasFavoriteType">
+                <div class="row">
+                    <div class="col-30">
+                        <img data-ng-src="{{ order.photoUrl | generateURL}}" src="../img/square.svg" class="lazy" fallback-src="{{order.fallBackImage}}" />
+                    </div>
+                    <div class="col-70">
+                        <h2>{{order.text}}</h2>
+                        <p><i class="ionicons ion-android-person"></i> {{order.userFullName}}</p>
+                        <div class="row">
+                            <div class="col-100">
+                                <p><i class="ionicons ion-android-pin"></i> {{order.toLocation}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p><a ng-click="GoToOrderDetails(order)" ng-class="{'blue':order.type == 1,'yellow':order.type == 2}" class="button button-big button-fill approve">موافقة على الطلب </a></p>
+            </div>
+            <div id="divNotificationAgentOrders" class="divAlert" ng-show="agentFavoriteOrderAlert">
+                <p class="pNotification">لا يوجد طلبات أو مشاوير</p>
+            </div>
+            <!--<div id="infiniteLoaderAgentFavorites" class="infiniteLoader infinite-scroll-preloader" ng-hide="agentFavoriteOrderAlert">
+                <div class="preloader">
+                    <img ng-src="img/load.svg" />
+                </div>
+            </div>-->
+        </div>
+    </div>
+
+</div>
+<div id="popupSuspende" class="popover">
+    <div class="popover-inner">
+
+        <p><i class="ionicons ion-close-circled"></i>سبب الالغاء لهذا الطلب </p>
+        <hr />
+        <div class="list-block">
+            <ul>
+                <li ng-repeat="reason in reasons">
+                    <label class="label-radio item-content">
+                        <!-- Checked by default -->
+                        <input type="radio" name="my-radio" ng-model="value" ng-change='getRefuseRequestId(reason.id)' value={{reason.id}}>
+                        <div class="item-media">
+                            <i class="icon icon-form-radio"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">{{reason.value}}</div>
+                        </div>
+                    </label>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="row">
+            <span ng-click="cancelOrder()" class="modal-button modal-button-bold">تم</span>
+            <span class="modal-button modal-button-bold close-popover">الغاء</span>
+        </div>
+    </div>
+</div>

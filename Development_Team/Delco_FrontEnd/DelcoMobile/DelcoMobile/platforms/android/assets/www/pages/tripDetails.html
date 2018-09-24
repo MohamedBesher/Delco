@@ -1,0 +1,129 @@
+﻿<div class="navbar" ng-model="trip">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a ng-click="GoBackAndCancelTrip(trip)" class="link icon-only"><i class="ionicons ion-android-arrow-forward"></i></a>
+            تفاصيل طلب مشوار
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications(trip)" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="content-block" ng-model="trip">
+        <div class="col-100">
+            <img src="img/1.png" style="width:40%; display:block; margin:auto; margin-bottom:1em; margin-top:1em;" />
+        </div>
+        <!-- Display the countdown timer in an element -->
+        <div id="clockDivTripDetails" class="clockdiv" ng-show="showTimer">
+            <div>
+                <span class="minutes"></span>
+                <div class="smalltext">Minutes</div>
+            </div>
+            <div>
+                <span class="seconds"></span>
+                <div class="smalltext">Seconds</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="row">
+                <div class="col-100">
+                    <h3> مشوار رقم {{trip.id}}</h3>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="divTripStatusDesc">
+            <p class="pTripStatus">{{statusText}}</p>
+        </div>
+
+
+        <div class="card">
+            <div class="row">
+                <div class="col-100" ng-show="trip.userName">
+                    <h3><i class="ionicons ion-person"></i> اسم مقدم الطلب</h3>
+                    <a ng-click="GoToUserDetails(trip,trip.userId)">{{trip.userName}}</a>
+                </div>
+                <div class="col-100" ng-show="hasAgent">
+                    <h3><i class="ionicons ion-person"></i> اسم المندوب</h3>
+                    <a ng-click="GoToAgentDetails(trip,trip.agentId)">{{trip.agentName}}</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" ng-show="hasRatings">
+            <div class="row">
+                <div class="col-100">
+                    <h3>
+                        <b><i class="ionicons ion-android-list"></i> تقييم المستخدمين: </b>
+                        <jk-rating-stars max-rating="5" rating="trip.degree" read-only="true"></jk-rating-stars>
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="row">
+                <div class="col-100" ng-show="trip.fromLocation">
+                    <h3 class="txt"><b><i class="ionicons ion-android-map"></i> من: </b><span>{{trip.fromLocation}}</span></h3>
+                </div>
+                <div class="col-100" ng-show="trip.address">
+                    <h3 class="txt"><b><i class="ionicons ion-android-map"></i>تفاصيل العنوان: </b><span>{{trip.address}}</span></h3>
+                </div>
+                <div class="col-100" ng-show="trip.toLocation">
+                    <h3 class="txt"><b><i class="ionicons ion-android-map"></i> إلى: </b><span>{{trip.toLocation}}</span></h3>
+                </div>
+                <div class="col-100" ng-show="trip.price">
+                    <h3 class="txt"><b><i class="ionicons ion-cash"></i> السعر التقريبي: </b><span>{{trip.price}} ريال</span></h3>
+                </div>
+                <div class="col-100" ng-show="trip.passengerNumber">
+                    <h3><b><i class="ionicons ion-android-car"></i> عدد الركاب: </b><span>{{trip.passengerNumber}} ركاب</span></h3>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" ng-show="hasAgent">
+            <div class="row">
+                <div class="col-100">
+                    <h3 class="txt">
+                        <b><i class="ionicons ion-android-map"></i> تقييم المندوب: </b>
+                    </h3>
+                    <div class="rate">
+                        <jk-rating-stars max-rating="5" rating="trip.degree" read-only="false" on-rating="RateTrip(rating, trip)"></jk-rating-stars>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" ng-show="isCancelled">
+            <div class="row">
+                <div class="col-100">
+                    <h3 class="txt">
+                        <b><i class="ionicons ion-ios-help-outline"></i> سبب الإلغاء: </b>
+                    </h3>
+                    <p>
+                        هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي" فتجعلها تبدو (أي الأحرف) وكأنها نص مقروء. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم إيبسوم بشكل إفتراضي كنموذج عن النص، وإذا قمت بإدخال "lorem ipsum" في أي محرك بحث ستظهر العديد من المواقع الحديثة العهد في نتائج البحث. على مدى السنين ظهرت نسخ جديدة ومختلفة من نص لوريم إيبسوم، أحياناً عن طريق الصدفة، وأحياناً عن عمد كإدخال بعض العبارات الفكاهية إليها.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <p><a ng-show="canCall" ng-click="clientCall(trip.userPhoneNumber)" class="button button-big button-fill darkGreen"><i class="ionicons ion-android-phone-portrait"></i>إتصال</a></p>
+        <p><a ng-show="canTrack" ng-click="GoToMapTrack(trip)" class="button button-big button-fill darkGreen"><i class="ionicons ion-android-pin"></i>تتبع مندوب</a></p>
+        <p><a ng-show="canConfirm" ng-click="ConfirmTripForAgent(trip)" class="button button-big button-fill blue"><i class="ionicons ion-checkmark-round"></i>تأكيد الطلب</a></p>
+        <p><a ng-show="canCancel" ng-click="CancelTripForAgent(trip)" class="button button-big button-fill red report-text"><i class="ionicons ion-close-round"></i>إلغاء الطلب</a></p>
+        <p><a ng-show="canAbuse" ng-click="ReportTripForAgent(trip)" class="button button-big button-fill bg-orange"><i class="ionicons ion-ios-help-outline"></i>إبلاغ عن إساءة</a></p>
+    </div>
+</div>

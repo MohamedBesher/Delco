@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saned.Delco.Data", "Saned.Delco.Data\Saned.Delco.Data.csproj", "{F92A4910-B79C-4452-B67A-A99F58CDCE38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saned.Delco.Api", "Saned.Delco.Api\Saned.Delco.Api.csproj", "{190DFC51-D8EE-4FBC-8F1E-BA814C699897}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saned.Delco.Admin", "Saned.Delco.Admin\Saned.Delco.Admin.csproj", "{4AB61D17-EB61-427A-9E99-1E97757C5F30}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F92A4910-B79C-4452-B67A-A99F58CDCE38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F92A4910-B79C-4452-B67A-A99F58CDCE38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F92A4910-B79C-4452-B67A-A99F58CDCE38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F92A4910-B79C-4452-B67A-A99F58CDCE38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{190DFC51-D8EE-4FBC-8F1E-BA814C699897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190DFC51-D8EE-4FBC-8F1E-BA814C699897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190DFC51-D8EE-4FBC-8F1E-BA814C699897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190DFC51-D8EE-4FBC-8F1E-BA814C699897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AB61D17-EB61-427A-9E99-1E97757C5F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AB61D17-EB61-427A-9E99-1E97757C5F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AB61D17-EB61-427A-9E99-1E97757C5F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AB61D17-EB61-427A-9E99-1E97757C5F30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://desktop-1ob3js3:8080/tfs/saned_delco
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Saned.Delco.Data\\Saned.Delco.Data.csproj
+		SccProjectName1 = Saned.Delco.Data
+		SccLocalPath1 = Saned.Delco.Data
+		SccProjectUniqueName2 = Saned.Delco.Api\\Saned.Delco.Api.csproj
+		SccProjectName2 = Saned.Delco.Api
+		SccLocalPath2 = Saned.Delco.Api
+		SccProjectUniqueName3 = Saned.Delco.Admin\\Saned.Delco.Admin.csproj
+		SccProjectName3 = Saned.Delco.Admin
+		SccLocalPath3 = Saned.Delco.Admin
+	EndGlobalSection
+EndGlobal

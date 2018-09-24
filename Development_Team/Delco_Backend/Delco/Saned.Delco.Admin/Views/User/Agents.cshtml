@@ -1,0 +1,87 @@
+﻿@using PagedList.Mvc
+@using Saned.Delco.Admin.Extensions
+@model PagedList.IPagedList<Saned.Delco.Data.Core.Models.ApplicationUser>
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "searchResult",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "ajaxLoaderDiv"
+    };
+}
+
+
+<style>
+    .Suspend {
+        background-color: rgba(255, 91, 91, 0.3) !important
+    }
+    .table-striped > tbody > tr:nth-of-type(odd).Suspend
+    {
+        background-color: rgba(255, 91, 91, 0.3) !important
+    }
+</style>
+<div class="col-sm-12">
+    <div class="card-box table-responsive">
+
+        <div class="header-title m-t-0 m-b-30">
+            المندوبين
+            <div class="pull-right">
+
+            </div>
+        </div>
+      
+            <div class="row">
+
+@using (Ajax.BeginForm("_Agents", options))
+{
+                    <div class="row" style="padding-bottom: 30px">
+
+                        <div class="form-group">
+
+                            <div class="col-xs-10">
+
+                                @Html.TextBox("Keyword", (string)ViewBag.Name, new { @class = "form-control" })
+
+                            </div>
+
+
+                            <div class="col-xs-2 pull-left">
+                                <button type="submit" class="btn btn-success pull-left waves-effect w-md waves-light m-b-5"><i class="fa fa-search" id="btnSearch"></i> بحث</button>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                }
+
+              
+                  
+                    <div class="col-sm-12" id="searchResult">
+
+                        @Html.Action("_Agents", new { Page = 1, PageSize = 10 })
+
+
+                 
+
+
+                </div>
+            </div>
+      
+        
+
+
+        
+
+    </div>
+</div>
+
+
+

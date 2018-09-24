@@ -1,0 +1,28 @@
+﻿@model Saned.Delco.Admin.Models.IndexViewModel
+@{
+    ViewBag.Title = "تفيير اعدادات الحساب";
+}
+
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>تفيير اعدادات الحساب</h4>
+    <hr />
+    <div class="card-box">
+        <label>كلمة المرور</label>
+        <hr />
+
+        @if (Model.HasPassword)
+            {
+            @Html.ActionLink("تغيير كلمة المرور", "ChangePassword")
+        }
+        else
+        {
+            @Html.ActionLink("انشاء كلمة المرور", "SetPassword")
+        }
+
+
+
+
+    </div>
+</div>

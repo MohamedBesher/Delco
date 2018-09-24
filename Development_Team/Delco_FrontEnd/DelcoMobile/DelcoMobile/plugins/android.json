@@ -1,0 +1,53 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-googlemaps": {
+            "API_KEY_FOR_ANDROID": "IzaSyBPQe37CDoSK0qgx0VbrLFCfnbApPolNKY",
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-spinner": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "sa.saned.delco"
+        }
+    }
+}

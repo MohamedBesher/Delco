@@ -1,0 +1,170 @@
+﻿@using PagedList.Mvc
+@using Saned.Delco.Admin.Extensions
+@model PagedList.IPagedList<Saned.Delco.Data.Core.Models.ApplicationUser>
+
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row">
+        <table id="datatable" class="table table-striped table-bordered">
+            <tr>
+                <th> اسم المستخدم</th>
+                <th>الاسم بالكامل </th>
+                <th> البريد الالكترونى</th>
+                <th> رقم الجوال</th>
+
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@(Url.Action("UserDetails", "User", new {id = item.Id}))">
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        <a title="تعديل" href="@(Url.Action("Update", "User", new {id = item.Id}))" class="btn btn-primary"><i title="تعديل" class="fa fa-pencil"></i></a>
+
+
+                        <a title="مشاوير" href="@(Url.Action("Trips", "UserRequests", new {userId = item.Id}))" class="btn btn-primary"><i title="مشاوير" class="fa fa-car"></i></a>
+                        <a title="الطلبات" href="@(Url.Action("Index", "UserRequests", new {userId = item.Id}))" class="btn btn-primary"><i title="الطلبات" class="fa fa-cart-plus"></i></a>
+                        
+                        @if (!item.PhoneNumberConfirmed)
+                        {
+                            <a title="قبول" class="btn btn-success" onclick="approveUser(this, '@item.Id')">
+                                <i title='قبول' class='fa fa-check'></i> 
+                            </a>
+                        }
+                       
+
+
+
+                        @Ajax.RawActionLink(string.Format("<i title='حذف' class='fa fa-trash'></i>"),
+                            "Destroy", "User",
+                            new { UserId = item.Id, Page = ViewBag.Page, Keyword = ViewBag.Keyword, PageSize = ViewBag.PageSize },
+                            new AjaxOptions
+                            {
+                                Confirm = "هل انت متأكد انك تريد حذف المستخدم ؟",
+                                UpdateTargetId = "searchResult",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "POST",
+                                LoadingElementId = "ajaxLoaderDiv",
+                                OnSuccess = "onsuccessDeletion",
+                                OnFailure = "onFailureDeletion"
+                            },
+                            new { @class = "btn btn-danger" })
+
+                        @*<a id="btn_lock" title="حذف" class="btn btn-danger" data-toggle="modal" role="button" onclick="deleteAccount('@item.Id') ">
+                <i title="حذف" class="fa fa-trash"></i>
+            </a>*@
+
+
+
+
+
+
+
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="pull-right">
+                @*@Html.PagedListPager(Model,
+                    page => Url.Action("_Users", new { page = page, keyword = ViewBag.keyword }))*@
+                
+                
+                @Html.PagedListPager(Model,
+                page => Url.Action("_Users", new { page = page, keyword = ViewBag.keyword }),
+                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+                { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, LoadingElementId = "ajaxLoaderDiv" }))
+                
+                
+                
+                
+
+            </div>
+            
+            
+
+
+        </div>
+    </div>
+
+
+
+    <script>
+        function onsuccessDeletion(data) {
+
+            NotificationService.displaySuccess("تم الحذف بنجاح");
+
+        }
+        function onFailureDeletion(jqXHR, textStatus, errorThrown) {
+
+            if (jqXHR.statusText == "NotFound")
+                NotificationService.displayError("هذا المستخدم غير موجود");
+            else
+                NotificationService.displayError("حدث خطأ أثناء الحذف .");
+
+
+        }
+
+
+        function approveUser(thisBtn,id) {
+            $.ajax({
+                type: 'GET',
+                url: '/User/ApproveUser/' + id,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    if (data === "OK") {
+                        NotificationService.displaySuccess("تم قبول المستخدم بنجاح.");
+                        $(thisBtn).hide();
+
+                        }
+                    else if (data === "NotFound") {
+                        NotificationService.displaySuccess("هذا المستخدم غير موجود .");
+                        } else {
+                    NotificationService.displayError("حدث خطأ أثناء قبول المستخدم .");
+                    }
+
+                },
+                error: function () {
+                    NotificationService.displayError("حدث خطأ أثناء قبول المستخدم .");
+
+                }
+            });
+
+            return false;
+        };
+    </script>
+
+
+}
+else
+{
+    <div class="alert alert-success">
+        <strong></strong> لا يوجد مستخدمين.
+    </div>
+}
+
+
+
+                   

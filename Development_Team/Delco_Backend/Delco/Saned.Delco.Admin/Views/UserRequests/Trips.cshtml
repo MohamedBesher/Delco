@@ -1,0 +1,103 @@
+﻿@using Saned.Delco.Admin.Controllers
+@using Saned.Delco.Data.Core.Enum
+@using Saned.Delco.Data.Core.Models
+@model Saned.Delco.Admin.Models.RequestSearchModel
+
+
+
+@{
+    ViewBag.Title = "مشاوير المستخدم";
+  
+}
+
+
+
+<div class="col-sm-12">
+    <div class="card-box table-responsive">
+
+        <div class="header-title m-t-0 m-b-30">
+
+            مشاوير المستخدم
+        </div>
+
+
+        <div class="row">
+
+            <div id="userdetails">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#new">مشاوير المعروضة</a></li>
+                    
+                    @if (!ViewBag.IsAgent)
+                    {
+                    <li><a data-toggle="tab" href="#cancel">مشاوير المحذوفة</a></li>
+
+
+                    }
+                    <li><a data-toggle="tab" href="#inProgress">مشاوير قيد التنفيذ</a></li>
+                    <li><a data-toggle="tab" href="#delivered">مشاوير المنفذة</a></li>
+               
+                </ul>
+
+                <div class="tab-content">
+                    
+                    <div id="new" class="tab-pane fade in active">
+                        @Html.Action("New",
+                            new
+                            {
+                                userId = ViewBag.UserId,
+                                type = ViewBag.Type
+                            })
+
+                    </div>
+@if (!ViewBag.IsAgent)
+{
+    <div id="cancel" class="tab-pane fade">
+        @Html.Action("Canceled",
+                               new
+                               {
+                                   userId = ViewBag.UserId,
+                                   type = ViewBag.Type
+
+                               })
+    </div>
+}
+                        
+                        <div id="inProgress" class="tab-pane fade">
+
+                            @Html.Action("InProgress",
+                               new
+                               {
+                                   userId = ViewBag.UserId,
+                                   type = ViewBag.Type
+
+                               })
+
+
+                        </div>
+
+                        <div id="delivered" class="tab-pane fade">
+
+                            @Html.Action("Delivered",
+                               new
+                               {
+                                   userId = ViewBag.UserId,
+                                       type = ViewBag.Type
+
+                               })
+
+                        </div>
+                    
+                 
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+</div>
+

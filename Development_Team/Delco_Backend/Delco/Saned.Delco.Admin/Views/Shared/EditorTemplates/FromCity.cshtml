@@ -1,0 +1,9 @@
+﻿@using System.Collections
+@model Saned.Delco.Data.Core.Models.City
+
+    @(
+ Html.Kendo().DropDownListFor(x => x)
+.BindTo((IEnumerable)ViewData["cities"])
+.DataValueField("Id")
+.DataTextField("Name")
+    )

@@ -1,0 +1,217 @@
+﻿@using Saned.Delco.Admin.Extensions
+@using Saned.Delco.Data.Core.Enum
+@model Saned.Delco.Admin.Models.AgentViewModel
+
+@{
+    ViewBag.Title = "تفاصيل المندوب";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>تفاصيل المندوب</h2>*@
+<style>
+    .form-group div {
+        padding-top:8px
+    }
+
+</style>
+
+<div class="col-sm-12">
+    <div class="card-box table-responsive">
+
+        <div class="header-title m-t-0 m-b-30">
+
+            تفاصيل المندوب
+
+        </div>
+
+        <div class="row">
+            <form action="#" class="form-horizontal">
+                <div class="col-lg-6">
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">اسم المستخدم</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.UserName, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">الاسم بالكامل</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.FullName, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">البريد الالكترونى</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Email, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">رقم الجوال</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.PhoneNumber, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">المدينة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Cityname, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">نوع الطلبات المفضلة </label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.TypeRequest, new { @class = "col-sm-5 control-label" })
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">شركة السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.CompanyName, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">نوع السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Model, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">موديل السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Type, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">لون السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Color, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">رقم لوحة السيارة</label>
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.PlateNumber, new { @class = "col-sm-5 control-label" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">عدد الركاب</label>
+                        <div class="col-sm-7">
+
+                            @Html.DisplayFor(model => model.PassengerNumber, new { @class = "col-sm-5 control-label" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">تقيم المندوب</label>
+                        <div class="col-sm-7">
+
+                            @Html.DisplayFor(model => model.Rate, new { @class = "col-sm-5 control-label" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ExecutedRequests, htmlAttributes: new { @class = "col-sm-5 control-label" })
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.ExecutedRequests, new { @class = "col-sm-5 control-label" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "col-sm-5 control-label" })
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.Total, new { @class = "col-sm-5 control-label" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AppPercentage, htmlAttributes: new { @class = "col-sm-5 control-label" })
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.AppPercentage, new { @class = "col-sm-5 control-label" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TotalAfterApp, htmlAttributes: new { @class = "col-sm-5 control-label" })
+                        <div class="col-sm-7">
+                            @Html.DisplayFor(model => model.TotalAfterApp, new { @class = "col-sm-5 control-label" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-3">
+                            @if (Model.Total != "0")
+                            {
+                                @Ajax.RawActionLink(string.Format("اخفاء جميع الطلبات"),
+                                "HideAllDelivedRequests", "User",
+                                new { UserId = Model.Id },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    LoadingElementId = "ajaxLoaderDiv",
+                                    OnSuccess = "onsuccessDeletion",
+                                    OnFailure = "onFailureDeletion"
+                                },
+                                new { @class = "btn btn-primary waves-effect w-md waves-light m-b-5" });
+                            }
+                          
+                        </div>
+                    </div>
+                      
+                </div>
+            </form>
+        </div>
+     
+    </div>
+</div>
+
+
+<script>
+    function onsuccessDeletion(data) {
+        NotificationService.displaySuccess(" تم اخفاء طلبات المندوب ");
+        setInterval(function() {
+            window.location.href = "/User/Agents";
+        }, 3000);
+       
+
+    }
+    function onFailureDeletion(jqXHR, textStatus, errorThrown) {
+        if (jqXHR.statusText == "NotFound")
+            NotificationService.displayError("هذا المستخدم غير موجود");
+        else if(jqXHR.statusText == "NoRequests")
+            NotificationService.displayError("لا يوجد طلبات منفذة لهذا المندوب .");
+        else
+            NotificationService.displayError("حدث خطأ أثناء الحذف .");
+    }
+
+</script>

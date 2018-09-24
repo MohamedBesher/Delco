@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F92A4910-B79C-4452-B67A-A99F58CDCE38}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Saned.Delco.Data</RootNamespace>
+    <AssemblyName>Saned.Delco.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OneSignalLibrary">
+      <HintPath>..\Saned.Delco.Api\Dll\OneSignalLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Dto\ApplicationUserDto.cs" />
+    <Compile Include="Core\Dto\NotificationDeviceRepository.cs" />
+    <Compile Include="Core\Dto\NotificationDto.cs" />
+    <Compile Include="Core\Dto\RequestDetailsDto.cs" />
+    <Compile Include="Core\Dto\RequestDto.cs" />
+    <Compile Include="Core\Enum\ApplicationTypes.cs" />
+    <Compile Include="Core\Enum\NotificationType.cs" />
+    <Compile Include="Core\Enum\PathTypesEnum.cs" />
+    <Compile Include="Core\Enum\RequestStatusEnum.cs" />
+    <Compile Include="Core\Enum\RequestTypesEnum.cs" />
+    <Compile Include="Core\Enum\RolesEnum.cs" />
+    <Compile Include="Core\IUnitOfWorkAsync.cs" />
+    <Compile Include="Core\Models\Abuse.cs" />
+    <Compile Include="Core\Models\Car.cs" />
+    <Compile Include="Core\Models\City.cs" />
+    <Compile Include="Core\Models\Client.cs" />
+    <Compile Include="Core\Models\ContactUs.cs" />
+    <Compile Include="Core\Models\DeviceSetting.cs" />
+    <Compile Include="Core\Models\EmailSetting.cs" />
+    <Compile Include="Core\Models\NotificationDevice.cs" />
+    <Compile Include="Core\Models\NotificationMessage.cs" />
+    <Compile Include="Core\Models\Path.cs" />
+    <Compile Include="Core\Models\Rating.cs" />
+    <Compile Include="Core\Models\RefreshToken.cs" />
+    <Compile Include="Core\Models\RefuseReason.cs" />
+    <Compile Include="Core\Models\RefuseRequest.cs" />
+    <Compile Include="Core\Models\Request.cs" />
+    <Compile Include="Core\Models\Setting.cs" />
+    <Compile Include="Core\Models\PassengerNumber.cs" />
+    <Compile Include="Core\Repositories\IPassengerNumberRepository.cs" />
+    <Compile Include="Core\Repositories\IRefuseReasonsRepository.cs" />
+    <Compile Include="Core\Repositories\IRefuseRequestsRepository.cs" />
+    <Compile Include="Core\Repositories\ISettingRepository.cs" />
+    <Compile Include="Core\Repositories\IRequestRepository.cs" />
+    <Compile Include="Core\Repositories\IRatingRepository.cs" />
+    <Compile Include="Core\Repositories\IPathRepository.cs" />
+    <Compile Include="Core\Repositories\INotificationMessageRepository.cs" />
+    <Compile Include="Core\Repositories\INotificationDeviceRepository.cs" />
+    <Compile Include="Core\Repositories\IDeviceSettingRepository.cs" />
+    <Compile Include="Core\Repositories\IContactUsRepository.cs" />
+    <Compile Include="Core\Repositories\ICityRepository.cs" />
+    <Compile Include="Core\Repositories\ICarRepository.cs" />
+    <Compile Include="Core\Repositories\IAbuseRepository.cs" />
+    <Compile Include="Core\Repositories\IBaseRepository.cs" />
+    <Compile Include="Core\Repositories\IEmailSettingRepository.cs" />
+    <Compile Include="Extentions\EnumExtentions.cs" />
+    <Compile Include="Migrations\201707040849030_initial-tables-creation.cs" />
+    <Compile Include="Migrations\201707040849030_initial-tables-creation.Designer.cs">
+      <DependentUpon>201707040849030_initial-tables-creation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707120859503_Add-PassengerCount-Column.cs" />
+    <Compile Include="Migrations\201707120859503_Add-PassengerCount-Column.Designer.cs">
+      <DependentUpon>201707120859503_Add-PassengerCount-Column.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707121138171_MergTripAndRequestTables.cs" />
+    <Compile Include="Migrations\201707121138171_MergTripAndRequestTables.Designer.cs">
+      <DependentUpon>201707121138171_MergTripAndRequestTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707121220282_AddDescriptionToRequestTable.cs" />
+    <Compile Include="Migrations\201707121220282_AddDescriptionToRequestTable.Designer.cs">
+      <DependentUpon>201707121220282_AddDescriptionToRequestTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707130854523_CreatePassengerNumberTable.cs" />
+    <Compile Include="Migrations\201707130854523_CreatePassengerNumberTable.Designer.cs">
+      <DependentUpon>201707130854523_CreatePassengerNumberTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707131001027_AddColumnNameToPassengerNumber.cs" />
+    <Compile Include="Migrations\201707131001027_AddColumnNameToPassengerNumber.Designer.cs">
+      <DependentUpon>201707131001027_AddColumnNameToPassengerNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707131458145_CreateRefuseRequest.cs" />
+    <Compile Include="Migrations\201707131458145_CreateRefuseRequest.Designer.cs">
+      <DependentUpon>201707131458145_CreateRefuseRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707160903148_CreateRefuseReasonsTable.cs" />
+    <Compile Include="Migrations\201707160903148_CreateRefuseReasonsTable.Designer.cs">
+      <DependentUpon>201707160903148_CreateRefuseReasonsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707160927324_RemoveTripIdFromNotification.cs" />
+    <Compile Include="Migrations\201707160927324_RemoveTripIdFromNotification.Designer.cs">
+      <DependentUpon>201707160927324_RemoveTripIdFromNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707160957393_add-col-Isread-NotificationDevices.cs" />
+    <Compile Include="Migrations\201707160957393_add-col-Isread-NotificationDevices.Designer.cs">
+      <DependentUpon>201707160957393_add-col-Isread-NotificationDevices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707161017253_AddIsSuspendColumn.cs" />
+    <Compile Include="Migrations\201707161017253_AddIsSuspendColumn.Designer.cs">
+      <DependentUpon>201707161017253_AddIsSuspendColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707161146178_AddRequestIdInRefuseRequest.cs" />
+    <Compile Include="Migrations\201707161146178_AddRequestIdInRefuseRequest.Designer.cs">
+      <DependentUpon>201707161146178_AddRequestIdInRefuseRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707251434079_UpdateRequestAndUser.cs" />
+    <Compile Include="Migrations\201707251434079_UpdateRequestAndUser.Designer.cs">
+      <DependentUpon>201707251434079_UpdateRequestAndUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707300914337_Add-Column-IsHidden-Request.cs" />
+    <Compile Include="Migrations\201707300914337_Add-Column-IsHidden-Request.Designer.cs">
+      <DependentUpon>201707300914337_Add-Column-IsHidden-Request.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707311039188_UpdateTermsOfConditionsType.cs" />
+    <Compile Include="Migrations\201707311039188_UpdateTermsOfConditionsType.Designer.cs">
+      <DependentUpon>201707311039188_UpdateTermsOfConditionsType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708031008020_UserId-Not-Required-ContactUS.cs" />
+    <Compile Include="Migrations\201708031008020_UserId-Not-Required-ContactUS.Designer.cs">
+      <DependentUpon>201708031008020_UserId-Not-Required-ContactUS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708061043459_Cascade-Delete-AspNetUsers.cs" />
+    <Compile Include="Migrations\201708061043459_Cascade-Delete-AspNetUsers.Designer.cs">
+      <DependentUpon>201708061043459_Cascade-Delete-AspNetUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708071107012_Cascade-Delete-Requests-NotificationMessage.cs" />
+    <Compile Include="Migrations\201708071107012_Cascade-Delete-Requests-NotificationMessage.Designer.cs">
+      <DependentUpon>201708071107012_Cascade-Delete-Requests-NotificationMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708131419221_AddNumberOfKilometersToCity.cs" />
+    <Compile Include="Migrations\201708131419221_AddNumberOfKilometersToCity.Designer.cs">
+      <DependentUpon>201708131419221_AddNumberOfKilometersToCity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708141042020_add-RequestIsSeen-ApplicationUser.cs" />
+    <Compile Include="Migrations\201708141042020_add-RequestIsSeen-ApplicationUser.Designer.cs">
+      <DependentUpon>201708141042020_add-RequestIsSeen-ApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708241032544_edit-realtion-car-aspNetUser.cs" />
+    <Compile Include="Migrations\201708241032544_edit-realtion-car-aspNetUser.Designer.cs">
+      <DependentUpon>201708241032544_edit-realtion-car-aspNetUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\EntityConfigurations\AbuseConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\CarConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\CityConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\ClientConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\ContactUsConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\DeviceSettingConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\EmailSettingConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\NotificationDeviceConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\NotificationMessageConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\PassengerNumbersConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\PathConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\RatingConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\RefreshTokenConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\RefuseReasonsConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\RefuseRequestsConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\RequestConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\SettingConfigurations.cs" />
+    <Compile Include="Persistence\EntityConfigurations\TripConfigurations.cs" />
+    <Compile Include="Persistence\IApplicationDbContext.cs" />
+    <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationUserManager.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationUserManagerImpl.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationUserStore.cs" />
+    <Compile Include="Persistence\Infrastructure\ApplicationUserStoreImpl.cs" />
+    <Compile Include="Persistence\Infrastructure\IUserCustomStore.cs" />
+    <Compile Include="Persistence\Providers\ApplicationTokenProvider.cs" />
+    <Compile Include="Persistence\Repositories\AbuseRepository.cs" />
+    <Compile Include="Persistence\Repositories\AuthRepository.cs" />
+    <Compile Include="Persistence\Repositories\BaseRepository.cs" />
+    <Compile Include="Persistence\Repositories\EmailSettingRepository.cs" />
+    <Compile Include="Persistence\Repositories\CarRepository.cs" />
+    <Compile Include="Persistence\Repositories\CityRepository.cs" />
+    <Compile Include="Persistence\Repositories\ContactUsRepository.cs" />
+    <Compile Include="Persistence\Repositories\DeviceSettingRepository.cs" />
+    <Compile Include="Persistence\Repositories\NotificationMessageRepository.cs" />
+    <Compile Include="Persistence\Repositories\PathRepository.cs" />
+    <Compile Include="Persistence\Repositories\RatingRepository.cs" />
+    <Compile Include="Persistence\Repositories\RefuseReasonsRepository.cs" />
+    <Compile Include="Persistence\Repositories\RefuseRequestsRepository.cs" />
+    <Compile Include="Persistence\Repositories\RequestRepository.cs" />
+    <Compile Include="Persistence\Repositories\SettingRepository.cs" />
+    <Compile Include="Persistence\Repositories\PassengerNumberRepository.cs" />
+    <Compile Include="Persistence\Services\EmailService.cs" />
+    <Compile Include="Persistence\Tools\EmailManager.cs" />
+    <Compile Include="Persistence\Tools\EnumUtil.cs" />
+    <Compile Include="Persistence\Tools\Utilty.cs" />
+    <Compile Include="Persistence\UnitOfWorkAsync.cs" />
+    <Compile Include="Persistence\Validators\ApplicationUserValidator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ApplicationOAuthBearerAuthenticationProvider.cs" />
+    <Compile Include="Providers\FacebookAuthProvider.cs" />
+    <Compile Include="Providers\GoogleAuthProvider.cs" />
+    <Compile Include="Providers\Helper.cs" />
+    <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
+    <Compile Include="Providers\SimpleRefreshTokenProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707040849030_initial-tables-creation.resx">
+      <DependentUpon>201707040849030_initial-tables-creation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707120859503_Add-PassengerCount-Column.resx">
+      <DependentUpon>201707120859503_Add-PassengerCount-Column.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707121138171_MergTripAndRequestTables.resx">
+      <DependentUpon>201707121138171_MergTripAndRequestTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707121220282_AddDescriptionToRequestTable.resx">
+      <DependentUpon>201707121220282_AddDescriptionToRequestTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707130854523_CreatePassengerNumberTable.resx">
+      <DependentUpon>201707130854523_CreatePassengerNumberTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707131001027_AddColumnNameToPassengerNumber.resx">
+      <DependentUpon>201707131001027_AddColumnNameToPassengerNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707131458145_CreateRefuseRequest.resx">
+      <DependentUpon>201707131458145_CreateRefuseRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707160903148_CreateRefuseReasonsTable.resx">
+      <DependentUpon>201707160903148_CreateRefuseReasonsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707160927324_RemoveTripIdFromNotification.resx">
+      <DependentUpon>201707160927324_RemoveTripIdFromNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707160957393_add-col-Isread-NotificationDevices.resx">
+      <DependentUpon>201707160957393_add-col-Isread-NotificationDevices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707161017253_AddIsSuspendColumn.resx">
+      <DependentUpon>201707161017253_AddIsSuspendColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707161146178_AddRequestIdInRefuseRequest.resx">
+      <DependentUpon>201707161146178_AddRequestIdInRefuseRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707251434079_UpdateRequestAndUser.resx">
+      <DependentUpon>201707251434079_UpdateRequestAndUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707300914337_Add-Column-IsHidden-Request.resx">
+      <DependentUpon>201707300914337_Add-Column-IsHidden-Request.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707311039188_UpdateTermsOfConditionsType.resx">
+      <DependentUpon>201707311039188_UpdateTermsOfConditionsType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708031008020_UserId-Not-Required-ContactUS.resx">
+      <DependentUpon>201708031008020_UserId-Not-Required-ContactUS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708061043459_Cascade-Delete-AspNetUsers.resx">
+      <DependentUpon>201708061043459_Cascade-Delete-AspNetUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708071107012_Cascade-Delete-Requests-NotificationMessage.resx">
+      <DependentUpon>201708071107012_Cascade-Delete-Requests-NotificationMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708131419221_AddNumberOfKilometersToCity.resx">
+      <DependentUpon>201708131419221_AddNumberOfKilometersToCity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708141042020_add-RequestIsSeen-ApplicationUser.resx">
+      <DependentUpon>201708141042020_add-RequestIsSeen-ApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708241032544_edit-realtion-car-aspNetUser.resx">
+      <DependentUpon>201708241032544_edit-realtion-car-aspNetUser.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

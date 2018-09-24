@@ -1,0 +1,166 @@
+﻿@using Saned.Delco.Admin.Controllers
+@using Saned.Delco.Admin.Models
+@using Saned.Delco.Data.Core.Models
+@model Saned.Delco.Admin.Models.PathSearchModel
+
+
+
+@{
+    ViewBag.Title = "المسارات الخارجية";
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "searchResult",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "ajaxLoaderDiv"
+    };
+}
+
+
+<div class="col-sm-12">
+    <div class="card-box">
+        <div class="header-title m-t-0 m-b-30">
+           
+             المسارات الخارجية
+            <div class="pull-right">
+
+                <a type="button" href="@Url.Action("Add","ExternalPaths")" class="btn btn-primary waves-effect w-md waves-light m-b-5"> <i class="fa fa-plus"></i>اضافة</a>
+
+            </div>
+        </div>
+       
+
+
+
+
+        <div class="row">
+            @using (Ajax.BeginForm("Search", options))
+            {
+                <div class="row" style="padding-bottom: 30px">
+
+                    <div class="form-group">
+
+                        <div class="col-xs-5">
+                            @Html.DropDownListFor(model => model.FromCityId,
+                        new SelectList(ViewBag.cities, "Id", "Name"), "--من مدينة--", new { @class = "form-control", id = "FromCityId" })
+
+
+                        </div>
+
+                        <div class="col-xs-5">
+
+                            @Html.DropDownListFor(model => model.ToCityId,
+                        new SelectList(ViewBag.cities, "Id", "Name"), "--الى مدينة--", new { @class = "form-control", id = "ToCityId" })
+
+
+                        </div>
+                        <div class="col-xs-2 pull-left">
+                            <button type="submit" class="btn btn-success pull-left waves-effect w-md waves-light m-b-5"><i class="fa fa-search"></i> بحث</button>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            }
+            <div class="col-sm-12" id="searchResult">
+                @Html.Action("Search", new { Page = 1, PageSize =10 })
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+@*<div class="k-rtl">
+        <a href="@Url.Action("Add","ExternalPaths")"></a>
+        @(Html.Kendo().Grid<ExternalPathViewModel>()
+          .Name("ExternalPathGrid")
+          //.ToolBar(toolbar => toolbar.Create().Text("أضافة"))
+
+          .ToolBar(toolbar => toolbar.Template
+              (@<text><a href="@Url.Action("Add","ExternalPaths")"
+                         class="btn btn-success">إضافة</a> </text>))
+
+          .Editable(editable => { editable.CancelDelete("الغاء"); editable.ConfirmDelete("حفظ"); })
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+          .HtmlAttributes(new { style = "height:550px;" })
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true)
+              .ButtonCount(5))
+          .Columns(columns =>
+          {
+              //columns.Bound(p => p.FromCity.Name).Title("من");
+              //columns.Bound(p => p.ToCity.Name).Title("الى");
+              //columns.Bound(p => p.FromCity).ClientTemplate("#=FromCity.Name#");
+              //columns.Bound(p => p.ToCity).ClientTemplate("#=ToCity.Name#");
+
+              //.ClientTemplate("#=FromCity.Name#");
+
+              columns.Bound(p => p.FromCity).EditorTemplateName("FromCity")
+                  .Title("من").ClientTemplate("#=FromCity.Name#");
+
+              columns.Bound(p => p.ToCity).EditorTemplateName("FromCity")
+                  .Title("الى").ClientTemplate("#=ToCity.Name#"); ;
+
+
+
+              columns.Bound(p => p.Price).Title("السعر");
+
+              columns.Template(@<text></text>).ClientTemplate("<a class='on-default edit-row' href='" + Url.Action("Edit", "ExternalPaths") + "/#=Id#'><i class='fa fa-pencil'></i></a>");
+              columns.Command(command =>
+              {
+
+
+                  command.Destroy().Text("حذف");
+              });
+          })
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .PageSize(20)
+              .Events(events => events.Error("error_handler"))
+              .Model(model =>
+              {
+                  model.Id(p => p.Id);
+                  model.Field(p => p.FromCity).DefaultValue(
+                      ViewData["defaultCity"] as City);
+
+                  model.Field(p => p.ToCity).DefaultValue(
+                      ViewData["defaultCity"] as City);
+              })
+              //.Create(update => update.Action("ExternalPaths_Create", "ExternalPaths"))
+              .Read(read => read.Action("ExternalPaths_Read", "ExternalPaths"))
+              .Update(update => update.Action("ExternalPaths_Update", "ExternalPaths"))
+              .Destroy(update => update.Action("ExternalPaths_Destroy", "ExternalPaths"))
+          ))
+    </div>*@
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>

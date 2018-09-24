@@ -1,0 +1,11 @@
+{
+     "android": {
+         "release": {
+             "keystore": "E:\\ReleaseKeys\\Delco\\debug.keystore",
+             "storePassword": "android",
+             "alias": "hellboyDelco",
+             "password" : "android",
+             "keystoreType": ""
+         }
+     }
+ }

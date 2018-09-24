@@ -1,0 +1,98 @@
+﻿<div class="navbar" ng-model="request">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a ng-click="GoBackAndCancelRequest(request)"  class="link icon-only "><i class="ionicons ion-android-arrow-forward"></i></a>
+            تفاصيل طلب جديد
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications(request)" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="content-block" ng-model="request">
+        <div class="col-100">
+            <img src="img/4.png" style="width:40%; display:block; margin:auto; margin-bottom:1em; margin-top:1em;" />
+        </div>
+        <!-- Display the countdown timer in an element -->
+        <div id="clockDivRequestDetails" class="clockdiv" ng-show="showTimer">
+            <div>
+                <span class="minutes"></span>
+                <div class="smalltext">Minutes</div>
+            </div>
+            <div>
+                <span class="seconds"></span>
+                <div class="smalltext">Seconds</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="row">
+                <div class="col-100">
+                    <h3> طلب رقم {{request.id}}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="divRequestStatusDesc">
+            <p class="pRequestStatus">{{statusText}}</p>
+        </div>
+
+        <div class="card">
+            <div class="row">
+                <div class="col-100">
+                    <a ng-click="GoToUserDetails(request,request.userId)"><i class="ionicons ion-person"></i> {{request.userName}}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="hasRatings">
+            <div class="row">
+                <div class="col-100">
+                    <h3>
+                        <b><i class="ionicons ion-android-list"></i> تقييم المستخدمين للمندوب: </b>
+                        <jk-rating-stars max-rating="5" rating="request.degree" read-only="true"></jk-rating-stars>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="row">
+                <div class="col-100" ng-show="request.description">
+                    <h3 class="txt"><b><i class="ionicons ion-ios-paper-outline"></i> تفاصيل الطلب: </b><span>{{request.description}}</span></h3>
+                </div>
+                <div class="col-100" ng-show="request.toLocation">
+                    <h3 class="txt"><b><i class="ionicons ion-android-map"></i> عنوان التوصيل: </b><span>{{request.toLocation}}</span></h3>
+                </div>
+                <div class="col-100" ng-show="request.address">
+                    <h3 class="txt"><b><i class="ionicons ion-android-map"></i> تفاصيل العنوان: </b><span>{{request.address}}</span></h3>
+                </div>
+                <div class="col-100" ng-show="request.requestCity">
+                    <h3 class="txt"><b><i class="ionicons ion-android-map"></i> مكان الطلب: </b><span>{{request.requestCity}}</span></h3>
+                </div>
+                <div class="col-100" ng-show="request.price">
+                    <h3><b><i class="ionicons ion-cash"></i> قيمة الطلب: </b><span>{{request.price}}</span></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="hasAgent">
+            <div class="row">
+                <div class="col-100">
+                    <h3 class="txt">
+                        <b><i class="ionicons ion-android-map"></i> تقييم المندوب: </b>
+                    </h3>
+                    <div class="rate">
+                        <jk-rating-stars max-rating="5" rating="request.degree" read-only="false" on-rating="RateRequest(rating, request)"></jk-rating-stars>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p><a ng-show="canTrack" ng-click="GoToMapTrack(request)" class="button button-big button-fill darkGreen"><i class="ionicons ion-android-pin"></i>تتبع مندوب</a></p>
+        <p><a ng-show="canCall" ng-click="clientCall(request.userPhoneNumber)" class="button button-big button-fill darkGreen"><i class="ionicons ion-android-phone-portrait"></i>إتصال</a></p>
+        <p><a ng-show="canConfirm" ng-click="ConfirmRequestForAgent(request)" class="button button-big button-fill blue"><i class="ionicons ion-checkmark-round"></i>تأكيد الطلب</a></p>
+        <p><a ng-show="canCancel" ng-click="CancelRequestForAgent(request)" class="button button-big button-fill red report-text"><i class="ionicons ion-close-round"></i>إلغاء الطلب</a></p>
+    </div>
+</div>

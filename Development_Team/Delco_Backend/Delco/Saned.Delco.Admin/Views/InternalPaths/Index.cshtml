@@ -1,0 +1,72 @@
+﻿@using Saned.Delco.Admin.Controllers
+@using Saned.Delco.Admin.Models
+@using Saned.Delco.Data.Core.Models
+@model Saned.Delco.Admin.Models.PathSearchModel
+
+
+
+@{
+    ViewBag.Title = "المسارات الداخلية";
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "searchResult",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "ajaxLoaderDiv"
+    };
+}
+
+
+
+<div class="col-sm-12">
+    <div class="card-box table-responsive">
+
+        <div class="header-title m-t-0 m-b-30">
+
+            المسارات الداخلية
+            <div class="pull-right">
+
+                <a type="button" href="@Url.Action("Add", "InternalPaths")" class="btn btn-primary waves-effect w-md waves-light m-b-5"><i class="fa fa-plus"></i> اضافة</a>
+
+            </div>
+        </div>
+
+        @using (Ajax.BeginForm("Search", options))
+        {
+            <div class="row" style="padding-bottom: 20px">
+
+
+                <div class="input-group">
+
+
+                    @Html.EditorFor(model => model.Keyword, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "ادخل كلمة البحث" } })
+
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-success pull-right"><i class="fa fa-search"></i> بحث</button>
+                    </span>
+                </div>
+
+
+
+
+
+            </div>
+        }
+
+        <div class="row">
+
+            <div class="col-sm-12" id="searchResult">
+                @Html.Action("Search", new { Page = 1, PageSize = 10 })
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

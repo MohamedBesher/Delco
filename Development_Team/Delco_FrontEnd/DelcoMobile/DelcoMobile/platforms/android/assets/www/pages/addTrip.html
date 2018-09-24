@@ -1,0 +1,94 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            بيانات طلب مشوار
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="content-block">
+        <div class="list-block">
+            <form name="$parent.AddTripForm" ng-submit="submitForm($parent.AddTripForm.$valid)" novalidate>
+                <ul>
+                
+                    <li>
+                        <div class="row">
+                            <div class="col-100">
+                                <div class="item-content" ng-class="submittedAddtrip && addTripReset && $parent.AddTripForm.tripCurrentLocation.$invalid?'has-error':'no-error'">
+                                    <div class="item-media"><i class="ionicons ion-android-map"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" name="tripCurrentLocation" placeholder="من" ng-model="addTripForm.tripCurrentLocation" required>
+                                        </div>
+                                    </div>
+                                    <div ng-click="openTripMapForCurrentLocation();" class="item-media">
+                                    <i class="ionicons ion-android-pin"></i></div>
+                                </div>
+                            </div>
+                         
+                        </div>
+                        <p ng-show="submittedAddtrip && addTripReset && $parent.AddTripForm.tripCurrentLocation.$error.required" class="error-block">يجب اختيار مكانك الحالي</p>
+                    </li>
+                    <li>
+                        <div class="item-content textarea"ng-class="submittedAddtrip && addTripReset && $parent.AddTripForm.tripHomeNumber.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-ios-paper-outline"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <textarea type="text" placeholder="اسم الشارع - رقم البيت" name="tripHomeNumber" ng-model="addTripForm.tripHomeNumber" required ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <p ng-show="submittedAddtrip && addTripReset && $parent.AddTripForm.tripHomeNumber.$error.required" class="error-block">يجب ادخال اسم الشارع ورقم البيت</p>
+                    </li>
+                    <li>
+                        <div class="row location">
+                            <div class="col-100">
+                                <div class="item-content" ng-class="submittedAddtrip && addTripReset && $parent.AddTripForm.tripDesiredLocation.$invalid?'has-error':'no-error'">
+                                    <div class="item-media"><i class="ionicons ion-android-map"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="text" name="tripDesiredLocation" placeholder="الي" ng-model="addTripForm.tripDesiredLocation" required>
+                                        </div>
+                                    </div>
+                                    <div ng-click="openTripMapForDesiredLocation();" class="item-media"><i class="ionicons ion-android-pin"></i></div>
+                                </div>
+                            </div>                 
+                        </div>
+                        <p ng-show="submittedAddtrip && addTripReset && $parent.AddTripForm.tripCurrentLocation.$error.required" class="error-block">يجب اختيار عنوان المشوار</p>
+                    </li>
+                    <li >
+                        <div id="tripPrice" class="item-content">
+                            <div class="item-media"><i class="ionicons ion-cash"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" ng-model="addTripForm.tripPrice" placeholder="السعر التقريبي للمشوار" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a id="tripPassanger" href="#" data-open-in="picker" data-picker-close-text="إغلاق" class="item-link smart-select" data-back-on-select="true">
+                            <select ng-model="addTripForm.passengerCount" ng-change="getPassangerCount(agentForm.passengerCount)" name="passengerCount" data-ng-options="passenger as passenger.name for passenger in passengers" required>
+                                <option value="" selected disabled>عدد ركاب السيارة</option>
+                            </select>
+                            <div class="item-content" ng-class="submittedAddtrip && addTripReset && $parent.AddTripForm.passengerCount.$invalid?'has-error':'no-error'">
+                                <div class="item-media"><i class="ionicons ion-android-car"></i></div>
+                                <div class="item-inner"> </div>
+                            </div>
+                            <p ng-show="submittedAddtrip && addTripReset && $parent.AddTripForm.passengerCount.$error.required" class="error-block">يجب اختيار عدد ركاب السيارة</p>
+                        </a>
+                    </li>                              
+                </ul>
+                <p> <button type="submit" ng-click="submittedAddtrip=true" class="button button-big fullWidth button-fill blue add-text"><i class="ionicons ion-checkmark-round"></i>تأكيد الطلب </button> </p>
+                </form>
+          </div>
+    </div>             
+</div>

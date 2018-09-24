@@ -1,0 +1,38 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            البيانات الشخصية
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="content-block">
+        <img src="img/avatar.png" class="profile_pic">
+        <div class="card">
+            <div class="row">
+                <div ng-show="IsNameExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-person"></i> الاسم: </b><span>{{name}}</span></h3>
+                </div>
+                <div ng-show="IsUserNameExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-person"></i> اسم الدخول: </b><span> {{username}}</span></h3>
+                </div>
+                <div ng-show="IsMobileExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-android-phone-portrait"></i> رقم الجوال: </b><span>{{mobile}}</span></h3>
+                </div>
+                <div ng-show="IsEmailExists" class="col-100">
+                    <h3 class="txt"><b><i class="ionicons ion-android-mail"></i> البريد الإلكترونى: </b><span>{{email}}</span></h3>
+                </div>
+            </div>
+        </div>
+        <p><a  ng-click="openEditProfile()" class="button button-big button-fill green" ng-show="IsOwner"><i class="ionicons ion-person-add"></i>تعديل البيانات الشخصية </a></p>
+
+    </div>
+</div>

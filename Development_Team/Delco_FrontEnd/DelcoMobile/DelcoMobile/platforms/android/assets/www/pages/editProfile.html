@@ -1,0 +1,58 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            تعديل البيانات الشخصية
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div class="page-content">
+    <div class="content-block">
+        <div class="list-block">
+            <form name="$parent.EditUserProfile" ng-submit="submitForm($parent.EditUserProfile.$valid)" novalidate>
+                <ul>
+                    <!--<li>
+                        <div class="img_content">                          
+                            <img data-ng-src="{{editUserForm.userImage | generateURL}}"
+                            src="../img/square.svg" class="profile_pic lazy" fallback-src="img/profile.png" />
+                        </div>
+                        <p><a ng-click="AddImage()" class="button button-big fullWidth button-fill red add-text">إضافة صورة</a></p>
+                        <p><a ng-click="RemoveImage()" class="button button-big fullWidth button-fill yellow add-text">حذف الصورة</a></p>
+                    </li>-->
+                    <li>
+                        <div class="item-content" ng-class="submittedUserEdit && editUserReset && $parent.EditUserProfile.name.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-person"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input   name="name" class="form-control" type="text" placeholder="الاسم" ng-model="editUserForm.name" required>
+                                </div>
+                            </div>
+                        </div>
+                        <p ng-show="submittedUserEdit && editUserReset && $parent.EditUserProfile.name.$error.required" class="error-block">يجب إدخال الإسم</p>
+                    </li>
+                    <li>
+                        <div class="item-content" ng-class="submittedUserEdit && editUserReset && $parent.EditUserProfile.email.$invalid?'has-error':'no-error'">
+                            <div class="item-media"><i class="ionicons ion-android-mail"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input name="email" class="form-control" type="email" placeholder="البريد الإلكترونى" ng-pattern="emailRegex" ng-model="editUserForm.email" required>
+                                </div>
+                            </div>
+                        </div>
+                        <p ng-show="submittedUserEdit && editUserReset  && $parent.EditUserProfile.email.$error.required" class="error-block">يجب إدخال البريد الإلكتروني</p>
+                        <p ng-show="submittedUserEdit && editUserReset && $parent.EditUserProfile.email.$error.pattern" class="error-block">البريد الإلكتروني غير صحيح</p>
+                    </li>
+                </ul>
+                <button type="submit" class="button button-big fullWidth button-fill blue add-text"  ng-click="submittedUserEdit=true" ><i class="ionicons ion-checkmark-round"></i>تعديل البيانات </button>
+            </form>
+         </div>
+             
+    </div>
+</div>

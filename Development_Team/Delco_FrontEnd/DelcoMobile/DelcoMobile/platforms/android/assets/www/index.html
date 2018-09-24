@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' ; script-src 'self' 'unsafe-inline' *; connect-src 'self' http://212.70.38.149 *; media-src *">-->
+
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>ديلكو</title>
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+    <link rel="stylesheet" href="css/framework7.material.rtl.min.css">
+    <link rel="stylesheet" href="css/my-app.css">
+    <link rel="stylesheet" href="css/Main.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/jquery.rateyo.css">
+    <link href="css/jk-rating-stars.min.css" rel="stylesheet" />
+    <script>
+        var reqRequestToTrack;
+    </script>
+</head>
+<body ng-app="myApp">
+    <div class="statusbar-overlay"></div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-right panel-cover">
+        <div class="content-block" ng-controller="mainController">
+            <div class="panel-prof">
+                <div class="img-container">
+                    <img id="imgUserPic" src="img/avatar.png" />
+                </div>
+                
+                <h4 id="hdrUserName">محمد الشربينى</h4>
+            </div>
+            <a id="linkMenuToHome" ng-click="GoToHome()" class="close-panel"><i class="icon ion-ios-home-outline"></i>الرئيسية</a>
+            <a id="linkMenuToUserProfile" ng-click="GoToMyProfile()" class="close-panel"><i class="ionicons ion-ios-person-outline"></i>حسابي</a>
+            <a id="linkMenuToUserRequests" ng-click="GoToMyRequests()" class="close-panel"><i class="ionicons ion-ios-plus-outline"></i>طلباتى</a>
+            <a id="linkMenuToUserNotifications" ng-click="GoToNotifications()" class="close-panel"><i class="ionicons ion-android-notifications-none"></i>الإشعارات</a>
+            <a id="linkMenuToContact" ng-click="GoToContact()" class="close-panel"><i class="ionicons ion-ios-email-outline"></i>تواصل معنا</a>
+            <a id="linkMenuToAbuse" ng-click="GoToAbuse()" class="close-panel"><i class="ionicons ion-ios-help-outline"></i>الإبلاغ عن إساءة</a>
+            <hr />
+            <a id="linkMenuToTerms" ng-click="GoToTerms()" class="close-panel"><i class="ionicons ion-ios-paper-outline"></i>شروط إستخدام التطبيق</a>
+            <a id="linkMenuToChangePassword" ng-click="GoToChangePassword()" class="close-panel"><i class="ionicons ion-person"></i>تغيير كلمة المرور</a>
+            <a id="linkMenuToLogin" ng-click="GoToLogin()" class="close-panel"><i class="ionicons ion-log-out"></i><label id="lblMenuLoginText"></label></a>
+        </div>
+    </div>
+
+    <!-- Views-->
+    <div class="views">
+        <div class="view view-main">
+            <div class="pages">
+                <!-- Landing Page-->
+                <landing-page id="landingPage" data-page="landing" class="page landing"></landing-page>
+                <!-- Login Page-->
+                <login-page id="loginPage" data-page="login" ng-class="currentOpeningPage == 'login'? 'page login' : 'page cached login' "></login-page>
+                <!-- Users Page-->
+                <users-page id="usersPage" data-page="users" ng-class="currentOpeningPage == 'users'? 'page login' : 'page cached login' "></users-page>
+                <!-- Signup user Page-->
+                <signup-user-page id="signupUserPage" data-page="signupUser" ng-class="currentOpeningPage == 'signupUser'? 'page login' : 'page cached login' "></signup-user-page>
+                <!-- Signup Agent Page-->
+                <signup-agent-page id="signupAgentPage" data-page="signupAgent" ng-class="currentOpeningPage == 'signupAgent'? 'page login' : 'page cached login' "></signup-agent-page>
+                <!-- forgetPass Page-->
+                <forget-pass-page id="forgetPassPage" data-page="forgetPass" ng-class="currentOpeningPage == 'forgetPass'? 'page login' : 'page cached login' "></forget-pass-page>
+                <!-- reset Page-->
+                <reset-password-page id="resetPasswordPage" data-page="resetPassword" ng-class="currentOpeningPage == 'resetPassword'? 'page login' : 'page cached login' "></reset-password-page>
+                <!-- changePass Page-->
+                <change-pass-page id="changePassPage" data-page="changePass" ng-class="currentOpeningPage == 'changePass'? 'page login' : 'page cached login' "></change-pass-page>
+                <!-- activation Page-->
+                <activation-page id="activationPage" data-page="activation" ng-class="currentOpeningPage == 'activation'? 'page login' : 'page cached login' "></activation-page>
+                <!-- home Page-->
+                <home-page id="homePage" data-page="home" ng-class="currentOpeningPage == 'home'? 'page home' : 'page cached home' "></home-page>
+                <!-- userProfile Page-->
+                <user-profile-page id="userProfilePage" data-page="userProfile" ng-class="currentOpeningPage == 'userProfile'? 'page categoryDetails' : 'page cached categoryDetails' "></user-profile-page>
+                <!-- contact Page-->
+                <contact-page id="contactPage" data-page="contact" ng-class="currentOpeningPage == 'contact'? 'page addDetails2' : 'page cached addDetails2' "></contact-page>
+                <!-- edit profile Page-->
+                <edit-profile-page id="editProfilePage" data-page="editProfile" ng-class="currentOpeningPage == 'editProfile'? 'page addDetails1' : 'page cached addDetails1' "></edit-profile-page>
+                <!-- agent profile Page-->
+                <agent-profile-page id="agentProfilePage" data-page="agentProfile" ng-class="currentOpeningPage == 'agentProfile'? 'page categoryDetails' : 'page cached categoryDetails' "></agent-profile-page>
+                <!-- user order Page-->
+                <user-order-page id="userOrderPage" data-page="userOrder" ng-class="currentOpeningPage == 'userOrder'? 'page categoryDetails profile navbar-fixed' : 'page cached categoryDetails profile navbar-fixed' "></user-order-page>
+                <!-- agent order Page-->
+                <agent-order-page id="agentOrderPage" data-page="agentOrder" ng-class="currentOpeningPage == 'agentOrder'? 'page categoryDetails profile navbar-fixed' : 'page cached categoryDetails profile navbar-fixed' "></agent-order-page>
+                <!-- trip details Page-->
+                <trip-details-page id="tripDetailsPage" data-page="tripDetails" ng-class="currentOpeningPage == 'tripDetails'? 'page categoryDetails' : 'page cached categoryDetails' "></trip-details-page>
+                <!-- request details Page-->
+                <request-details-page id="RequestDetailsPage" data-page="requestDetails" ng-class="currentOpeningPage == 'requestDetails'? 'page categoryDetails' : 'page cached categoryDetails' "></request-details-page>
+                <!-- contact Page-->
+                <add-trip-page id="addTripPage" data-page="addTrip" ng-class="currentOpeningPage == 'addTrip'? 'page addDetails1' : 'page cached addDetails1' "></add-trip-page>
+                <!-- add request Page-->
+                <add-request-page id="addRequestPage" data-page="addRequest" ng-class="currentOpeningPage == 'addRequest'? 'page addDetails2' : 'page cached addDetails2' "></add-request-page>
+                <!-- report Page-->
+                <report-page id="reportPage" data-page="report" ng-class="currentOpeningPage == 'report'? 'page addDetails2' : 'page cached addDetails2' "></report-page>
+                <!-- terms Page-->
+                <terms-page id="termsPage" data-page="terms" ng-class="currentOpeningPage == 'terms'? 'page categoryDetails' : 'page cached categoryDetails' "></terms-page>
+                <!-- user notification Page-->
+                <user-notification-page id="userNotificationPage" data-page="userNotification" ng-class="currentOpeningPage == 'userNotification'? 'page categoryDetails notification' : 'page cached categoryDetails notification' "></user-notification-page>
+                <!-- agent notification Page-->
+                <agent-notification-page id="agentNotificationPage" data-page="agentNotification" ng-class="currentOpeningPage == 'agentNotification'? 'page categoryDetails notification' : 'page cached categoryDetails notification' "></agent-notification-page>
+                <!-- map track Page-->
+                <map-track-page id="mapTrackPage" data-page="mapTrack" ng-class="currentOpeningPage == 'mapTrack'? 'page categoryDetails' : 'page cached categoryDetails' "></map-track-page>
+                <!--trip map Page-->
+                <trip-map-page id="tripMapPage" data-page="tripMap" ng-class="currentOpeningPage == 'tripMap'? 'page categoryDetails' : 'page cached categoryDetails' "></trip-map-page>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- rules popover -->
+    <div class="popup popup-rules" ng-controller="mainController">
+        <div class="row">
+            <h2><span class="close-popup"><i class="ionicons ion-close-round"></i></span><span>الشروط والأحكام</span></h2>
+        </div>
+        <h4>{{terms}}</h4>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-animate.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.js"></script>
+    <script src="js/framework7.js"></script>
+    <script src="js/jquery-2.1.0.js"></script>
+    <!-- ----------------------------- SignalR ----------------------------- -->
+    <script src="js/jquery.signalR-2.1.1.min.js"></script>
+    <script src="http://delcoapi.saned-projects.com/signalr/hubs"></script>
+
+    <!-- ---------------------------------------------------------------------- -->
+
+    <script src="js/jquery.rateyo.js"></script>
+    <script src="scripts/Config.js"></script>
+    <script src="scripts/ErrorModule.js"></script>
+    <script src="scripts/CookiesService.js"></script>
+    <script src="scripts/SidePanel.js"></script>
+    <script src="scripts/InitFramework.js"></script>
+    <script src="scripts/Language.js"></script>
+    <script src="scripts/Helpers.js"></script>
+    <script src="scripts/Filters.js"></script>
+    <script src="scripts/Service.js"></script>
+    <script src="scripts/InitSignalR.js"></script>
+    <script src="js/jk-rating-stars.js"></script>
+    <script>
+        language.ChangeTheme();
+    </script>
+
+    <script src="controllers/mainController.js"></script>
+    <script src="controllers/loginController.js"></script>
+    <script src="controllers/landingController.js"></script>
+    <script src="controllers/signupUserController.js"></script>
+    <script src="controllers/signupAgentController.js"></script>
+    <script src="controllers/activationController.js"></script>
+    <script src="controllers/changePasswordController.js"></script>
+    <script src="controllers/contactController.js"></script>   
+    <script src="controllers/forgetPasswordController.js"></script>
+    <script src="controllers/homeController.js"></script>   
+    <script src="controllers/resetPasswordController.js"></script>
+    <script src="controllers/userProfileController.js"></script>
+    <script src="controllers/addRequestController.js"></script>
+    <script src="controllers/addTripController.js"></script>
+    <script src="controllers/agentNotificationController.js"></script>
+    <script src="controllers/agentOrderController.js"></script>
+    <script src="controllers/agentProfileController.js"></script>
+    <script src="controllers/editProfileController.js"></script>
+    <script src="controllers/reportController.js"></script>
+    <script src="controllers/requestDetailsController.js"></script>
+    <script src="controllers/termsController.js"></script>
+    <script src="controllers/tripDetailsController.js"></script>
+    <script src="controllers/userNotificationController.js"></script>
+    <script src="controllers/userOrderController.js"></script>
+    <script src="controllers/usersController.js"></script>
+    <script src="controllers/mapTrackController.js"></script>
+    <script src="controllers/tripMapController.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW6iTYPN0CfOkjCVui1DLGw0cN3lQMnZw&language=ar&region=EG&libraries=places,geometry" async defer></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".rateyo").rateYo();
+        })
+    </script>
+
+</body>
+</html>

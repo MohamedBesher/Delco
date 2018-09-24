@@ -1,0 +1,37 @@
+﻿<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left sliding">
+            <a href="#" class="link icon-only back"><i class="ionicons ion-android-arrow-forward"></i></a>
+            الإشعارات
+        </div>
+        <div class="right sliding">
+            <a ng-click="GoToNotifications()" class="link icon-only"><img src="img/notification.png" /></a>
+        </div>
+    </div>
+</div>
+<div class="version">
+    <p class="pVersion"></p>
+</div>
+<div id="divInfiniteUserNotifications" class="page-content infinite-scroll pull-to-refresh-content">
+    <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+    </div>
+    <div class="content-block">
+        <div ng-repeat="notify in userNotification">
+            <div class="card" style="border-right :5px solid {{notify.color}}">
+                <h3>
+                    <b><i style="color:{{notify.color}}" class="{{notify.icon}}"></i> {{notify.message}}</b>
+                </h3>
+                <span>{{notify.reason}}</span>
+            </div>
+        </div>
+        <div id="divNotificationUserNotifications" class="divAlert" ng-show="userNotificationsAlert">
+            <p class="pNotification">لا يوجد إشعارات</p>
+        </div>
+        <!--<div id="infiniteLoaderUserNotifications" class="infiniteLoader infinite-scroll-preloader" ng-show="userNotificationsInfiniteLoader">
+            <div class="preloader">
+                <img ng-src="img/load.svg" />
+            </div>
+        </div>-->
+    </div>
+</div>

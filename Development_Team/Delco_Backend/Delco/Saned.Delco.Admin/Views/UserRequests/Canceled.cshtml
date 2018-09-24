@@ -1,0 +1,111 @@
+﻿
+@using Saned.Delco.Admin.Controllers
+@using Saned.Delco.Admin.Models
+@using Saned.Delco.Data.Core.Enum
+@using Saned.Delco.Data.Core.Models
+@model Saned.Delco.Admin.Models.RequestSearchModel
+
+
+
+@{
+    ViewBag.Title = "الطلبات المحذوفة ";
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "CanceledResult",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "ajaxLoaderDiv"
+    };
+}
+
+
+
+<div class="col-sm-12">
+    <div class="card-box table-responsive">
+
+        
+     
+
+@if (ViewBag.Type == RequestTypeEnum.Request)
+{
+    using (Ajax.BeginForm("SearchCanceled", options))
+    {
+        <div class="row" style="padding-bottom: 20px">
+
+            @Html.HiddenFor(model => model.Type, new { @Value = ViewBag.Type })
+            @Html.HiddenFor(model => model.Status, new { @Value = ViewBag.Status })
+            @Html.HiddenFor(model => model.UserId, new { @Value = ViewBag.UserId })
+
+
+            <div class="row" style="padding-bottom: 30px">
+
+                <div class="form-group">
+
+                    <div class="col-xs-10">
+                        @Html.DropDownListFor(model => model.CityId,
+                        new SelectList(ViewBag.cities, "Id", "Name"), "--فى مدينة --",
+                        new { @class = "form-control", id = "FromCityId" })
+
+
+
+
+                    </div>
+
+
+
+
+
+
+                    <script>
+                            function onAdditionalData() {
+                                return {
+                                    text: $("#UserId").val()
+                                };
+                            }
+                    </script>
+                    <div class="col-xs-2 pull-left">
+                        <button type="submit" class="btn btn-success pull-left waves-effect w-md waves-light m-b-5"><i class="fa fa-search"></i> بحث</button>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+    }
+}
+       
+
+        <div class="row">
+
+            <div class="col-sm-12" id="CanceledResult">
+
+
+                @Html.Action("SearchCanceled",
+                               new
+                               {
+                                   Page = 1,
+                                   PageSize = 10,
+                                   Status = RequestStatusEnum.Canceled,
+                                   UserId = ViewBag.UserId,
+                                   Type=ViewBag.Type
+
+
+                               })
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
